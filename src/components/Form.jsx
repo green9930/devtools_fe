@@ -1,18 +1,16 @@
-import styled from "styled-components";
-import Dropdown from "react-bootstrap/Dropdown";
-import DropdownButton from "react-bootstrap/DropdownButton";
-import TextArea from "./elements/TextArea";
-import { colors } from "styles/theme";
-import Input from "./elements/Input";
-import Button from "./elements/Button";
-import { useState } from "react";
+import styled from 'styled-components';
+import Dropdown from 'react-bootstrap/Dropdown';
+import DropdownButton from 'react-bootstrap/DropdownButton';
+import TextArea from './elements/TextArea';
+import { colors } from 'styles/theme';
+import Input from './elements/Input';
+import { useState } from 'react';
 
 const Form = () => {
-  const [option, setOption] = useState("분류");
+  const [option, setOption] = useState('분류');
 
   return (
     <div>
-      {" "}
       <StTopDiv>
         <div>
           <Dropdown
@@ -23,7 +21,6 @@ const Form = () => {
             <StDropdown variant="success" id="dropdown-basic">
               {option}
             </StDropdown>
-
             <Dropdown.Menu>
               <StDorpdownItem href="#/action-1" eventKey="하드웨어">
                 하드웨어
@@ -45,17 +42,17 @@ const Form = () => {
         border={`${colors.gray2} 1px solid`}
       />
       <StBottomButton>
-        <Button color={colors.white} size="360px" height="45px">
+        {/* <Button color={colors.white} size="360px" height="45px">
           작성완료
-        </Button>
-        <Button
+        </Button> */}
+        {/* <Button
           color={colors.black}
           size="360px"
           height="45px"
           backgroundcolor={colors.white}
         >
           나가기
-        </Button>
+        </Button> */}
       </StBottomButton>
       <StMsgBox>
         <StMsg>제목을 입력해 주세요.</StMsg>
@@ -96,7 +93,7 @@ const StDropdown = styled(Dropdown.Toggle)`
 const StDorpdownItem = styled(Dropdown.Item)`
   &:hover {
     background-color: ${colors.green1};
-    font-family: "Inter";
+    font-family: 'Inter';
     font-style: normal;
     font-weight: 600;
     font-size: 14px;
@@ -110,7 +107,7 @@ const StDorpdownItem = styled(Dropdown.Item)`
 
   width: 190px;
   height: 32px;
-  font-family: "Inter";
+  font-family: 'Inter';
   font-style: normal;
   font-weight: 600;
   font-size: 14px;
