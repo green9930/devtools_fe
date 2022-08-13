@@ -11,6 +11,7 @@ const GlobalStyle = createGlobalStyle`
   body {
     background-color: ${colors.white};
     margin: 0 auto;
+    width: 1440px;
   }
 
   h1 {

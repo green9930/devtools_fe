@@ -1,13 +1,10 @@
-import Layout from "components/layout/Layout";
-import DevToolsList from "components/DevToolsList";
-import DevTool from "components/DevTool";
+import Layout from 'components/layout/Layout';
+import DevToolsList from 'components/DevToolsList';
 
 const MainPage = () => {
   return (
     <Layout>
-      <DevToolsList>
-        <DevTool />
-      </DevToolsList>
+      <DevToolsList />
     </Layout>
   );
 };

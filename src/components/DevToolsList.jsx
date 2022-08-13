@@ -1,8 +1,6 @@
-import styled from "styled-components";
-import { Button } from "react-bootstrap";
-import RESP from "mockAPI/reponse";
-import DevTool from "./DevTool";
-import Btn from "./elements/Button";
+import styled from 'styled-components';
+import RESP from 'mockAPI/reponse';
+import DevTool from './DevTool';
 
 const DevToolsList = () => {
   return (
@@ -24,7 +22,3 @@ const StDevToolsList = styled.div`
   margin: 260px auto;
   flex-wrap: wrap;
 `;
-
-/* <Btn size="100px" height="40px" margin="10px" variant="outline-primary">
-  //   버튼
-  // </Btn> */
