@@ -7,8 +7,8 @@ const initialState = {
   error: null,
 };
 
-export const __createComments = createAsyncThunk(
-  'createComments',
+export const __postComments = createAsyncThunk(
+  'postComments',
   async (payload, thunkAPI) => {
     try {
       const response = await axios.post('', payload);
@@ -19,38 +19,12 @@ export const __createComments = createAsyncThunk(
   }
 );
 
-export const __readComments = createAsyncThunk(
-  'readComments',
+export const __getComments = createAsyncThunk(
+  'getComments',
   async (payload, thunkAPI) => {
     try {
       const response = await axios.get('');
       return thunkAPI.fulfillWithValue(response.data);
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error);
-    }
-  }
-);
-
-export const __updateComments = createAsyncThunk(
-  'updateComments',
-  async (payload, thunkAPI) => {
-    try {
-      await axios.patch(``, {
-        comment: payload.comment,
-      });
-      return thunkAPI.fulfillWithValue(payload);
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error);
-    }
-  }
-);
-
-export const __deleteComments = createAsyncThunk(
-  'deleteComments',
-  async (payload, thunkAPI) => {
-    try {
-      await axios.delete(``);
-      return thunkAPI.fulfillWithValue(payload);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }
@@ -62,47 +36,28 @@ export const commentsSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: {
-    [__createComments.pending]: (state, action) => {
+    [__postComments.pending]: (state, action) => {
       state.isLoading = true;
     },
-    [__createComments.fulfilled]: (state, action) => {
+    [__postComments.fulfilled]: (state, action) => {
       state.isLoading = false;
       console.log('POST COMMENTS', action);
     },
-    [__createComments.rejected]: (state, action) => {
+    [__postComments.rejected]: (state, action) => {
       state.isLoading = false;
       state.error = action.payload;
     },
-    [__readComments.pending]: (state) => {
+    [__getComments.pending]: (state) => {
       state.isLoading = true;
     },
-    [__readComments.fulfilled]: (state, action) => {
+    [__getComments.fulfilled]: (state, action) => {
       state.isLoading = false;
       console.log('GET COMMENTS', action);
     },
-    [__readComments.rejected]: (state, { payload }) => {
+    [__getComments.rejected]: (state, { payload }) => {
       state.isLoading = false;
       state.error = payload;
     },
-    [__updateComments.pending]: (state, { payload }) => {
-      state.isLoading = true;
-    },
-    [__updateComments.fulfilled]: (state, { payload }) => {
-      state.isLoading = false;
-      console.log('UPDATE COMMENTS', payload);
-    },
-    [__updateComments.rejected]: (state, { payload }) => {
-      state.isLoading = false;
-      state.error = payload;
-    },
-    [__deleteComments.pending]: (state, { payload }) => {
-      state.isLoading = true;
-    },
-    [__deleteComments.fulfilled]: (state, { payload }) => {
-      state.isLoading = false;
-      console.log('DELETE COMMENTS', payload);
-    },
-    [__deleteComments.rejected]: () => {},
   },
 });
 
