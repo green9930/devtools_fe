@@ -1,16 +1,15 @@
-import styled from "styled-components";
-import Button from "react-bootstrap/Button";
-import Card from "react-bootstrap/Card";
-import "bootstrap/dist/css/bootstrap.min.css";
-import { colors } from "styles/theme";
-import HW from "../assets/HW.jpg";
-import SW from "../assets/SW.jpg";
+import styled from 'styled-components';
+import Card from 'react-bootstrap/Card';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { colors } from 'styles/theme';
+import HW from '../assets/HW.jpg';
+import SW from '../assets/SW.jpg';
 
 const DevTool = (props) => {
   return (
     <div>
-      <Card style={{ width: "347px", height: "398px" }}>
-        {props.item.category == "하드웨어" ? (
+      <Card style={{ width: '347px', height: '398px' }}>
+        {props.item.category == '하드웨어' ? (
           <Card.Img variant="top" src={HW} />
         ) : (
           <Card.Img variant="top" src={SW} />
@@ -38,7 +37,7 @@ const Category = styled.span`
   height: 24px;
   left: 173px;
   top: 480px;
-  font-family: "SpoqaHanSans";
+  font-family: 'SpoqaHanSans';
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
@@ -51,7 +50,7 @@ const Title = styled.span`
   height: 36px;
   left: 663px;
   top: 475px;
-  font-family: "SpoqaHanSans";
+  font-family: 'SpoqaHanSans';
   font-style: normal;
   font-weight: 700;
   font-size: 24px;
@@ -63,7 +62,7 @@ const UserName = styled.span`
   height: 24px;
   left: 967px;
   top: 526px;
-  font-family: "Inter";
+  font-family: 'Inter';
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
@@ -76,7 +75,7 @@ const Date = styled.div`
   height: 15px;
   left: 967px;
   top: 622px;
-  font-family: "Inter";
+  font-family: 'Inter';
   font-style: normal;
   font-weight: 400;
   font-size: 12px;
