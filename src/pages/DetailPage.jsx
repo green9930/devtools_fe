@@ -1,15 +1,15 @@
-import React from "react";
-import DetailViewer from "../components/DetailViewer";
-import DetailEditor from "../components/DetailEditor";
-import Comment from "../components/Comment";
+import Layout from 'components/layout/Layout';
+import Comment from 'components/Comment';
+import DetailEditor from 'components/DetailEditor';
+import DetailViewer from 'components/DetailViewer';
 
 const DetailPage = () => {
   return (
-    <>
+    <Layout>
       <DetailViewer />
       <DetailEditor />
       <Comment />
-    </>
+    </Layout>
   );
 };
 
