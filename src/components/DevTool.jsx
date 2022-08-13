@@ -3,18 +3,27 @@ import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { colors } from "styles/theme";
+import HW from "../assets/HW.jpg";
+import SW from "../assets/SW.jpg";
 
 const DevTool = (props) => {
   return (
     <div>
       <Card style={{ width: "347px", height: "398px" }}>
-        <Card.Img variant="top" src="holder.js/100px180" />
+        {props.item.category == "하드웨어" ? (
+          <Card.Img variant="top" src={HW} />
+        ) : (
+          <Card.Img variant="top" src={SW} />
+        )}
         <div>
-          <Card.Title>
-            <Category>[하드웨어] </Category>
-            <Title>{props.item.title}</Title>
-          </Card.Title>
-          <UserName>{props.item.username}</UserName>
+          <CardTop>
+            <Card.Title>
+              <Category>[{props.item.category}] </Category>
+              <Title>{props.item.title}</Title>
+            </Card.Title>
+            <UserName>{props.item.username}</UserName>
+          </CardTop>
+
           <Date>{props.item.createAt}</Date>
         </div>
       </Card>
@@ -74,4 +83,11 @@ const Date = styled.div`
   line-height: 15px;
   color: ${colors.blue};
   margin-top: 72px;
+  margin-left: 24px;
+  margin-bottom: 24px;
+`;
+
+const CardTop = styled.div`
+  margin-top: 14px;
+  margin-left: 24px;
 `;
