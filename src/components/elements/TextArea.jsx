@@ -2,8 +2,9 @@ import styled from "styled-components";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Form from "react-bootstrap/Form";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { colors } from "styles/theme";
 
-const TextArea = ({ width, margin }) => {
+const TextArea = ({ width, margin, height, border }) => {
   return (
     <>
       <MyButton
@@ -15,7 +16,8 @@ const TextArea = ({ width, margin }) => {
         <Form.Control
           as="textarea"
           placeholder="Leave a comment here"
-          style={{ height: "100px" }}
+          style={{ height: height }}
+          borer={border}
         />
       </MyButton>
     </>
@@ -24,7 +26,7 @@ const TextArea = ({ width, margin }) => {
 
 export default TextArea;
 
-const MyButton = styled(FloatingLabel)(({ width, margin, height }) => ({
+const MyButton = styled(FloatingLabel)(({ width, margin, height, border }) => ({
   width: width || "auto",
   color: "black",
   margin: margin || "auto",

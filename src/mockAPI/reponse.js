@@ -1,7 +1,6 @@
 // HotDeal.jsx
 // const resp = await axios.get('EC2IP:8000/api/hotdeals')
 // const resp = RESP.HOTDEALS;
-
 // response.js
 const RESP = [
   {
