@@ -1,7 +1,7 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 const NavBar = () => {
-  return;
+  return <div></div>;
 };
 
 export default NavBar;

@@ -1,10 +1,9 @@
-import React from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import DetailPage from "../pages/DetailPage";
-import FormPage from "../pages/FormPage";
-import LoginPage from "../pages/LoginPage";
-import MainPage from "../pages/MainPage";
-import RegisterPage from "../pages/RegisterPage";
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import DetailPage from 'pages/DetailPage';
+import FormPage from 'pages/FormPage';
+import LoginPage from 'pages/LoginPage';
+import MainPage from 'pages/MainPage';
+import RegisterPage from 'pages/RegisterPage';
 
 const Router = () => {
   return (
