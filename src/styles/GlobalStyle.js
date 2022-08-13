@@ -46,6 +46,12 @@ const GlobalStyle = createGlobalStyle`
     cursor: pointer;
   }
 
+  input {
+    ::placeholder {
+      font-size: 14px;
+    }
+  }
+
   button, input, textarea {
     :focus {
       outline: none;
