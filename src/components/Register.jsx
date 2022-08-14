@@ -26,13 +26,14 @@ const Register = () => {
     passed: '사용 가능한 아이디입니다.',
     notPassed: '이미 사용 중인 아이디입니다.',
   };
+
   const handleSubmit = (e) => {
     // const result = formValidator();
   };
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
+      <form>
         <InputContainer>
           <IdContainer>
             <Input
@@ -42,7 +43,7 @@ const Register = () => {
               name="id"
               placeHolderText="ID를 입력해 주세요."
               value={userId}
-              // onChangeHandler={userIdHandler}
+              onChangeHandler={userIdHandler}
             />
             <StButton
               checkDuplicate={checkDuplicate}
@@ -58,6 +59,7 @@ const Register = () => {
               </Btn>
             </StButton>
           </IdContainer>
+
           <PasswordContainer>
             <Input
               labelText="password"
@@ -89,6 +91,7 @@ const Register = () => {
             variant="black_outline"
             onClickHandler={() => navigate('/login')}
           >
+            {' '}
             뒤로 가기
           </Btn>
         </ButtonContainer>
