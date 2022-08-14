@@ -19,6 +19,6 @@ const StDevToolsList = styled.div`
   flex-direction: row;
   justify-content: center;
   gap: 50px;
-  margin: 260px auto;
+  margin: 100px auto;
   flex-wrap: wrap;
 `;

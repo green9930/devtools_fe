@@ -4,17 +4,23 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { colors } from 'styles/theme';
 import HW from '../assets/HW.jpg';
 import SW from '../assets/SW.jpg';
+import { useNavigate } from 'react-router-dom';
 
 const DevTool = (props) => {
+  const navigate = useNavigate();
+
+  /* FAKE ID ------------------------------------------------------------------ */
+  const id = 1;
+
   return (
     <div>
       <Card style={{ width: '347px', height: '398px' }}>
-        {props.item.category == '하드웨어' ? (
+        {props.item.category === '하드웨어' ? (
           <Card.Img variant="top" src={HW} />
         ) : (
           <Card.Img variant="top" src={SW} />
         )}
-        <div>
+        <CardInfoContainer onClick={() => navigate(`/detail/${id}`)}>
           <CardTop>
             <Card.Title>
               <Category>[{props.item.category}] </Category>
@@ -24,13 +30,17 @@ const DevTool = (props) => {
           </CardTop>
 
           <Date>{props.item.createAt}</Date>
-        </div>
+        </CardInfoContainer>
       </Card>
     </div>
   );
 };
 
 export default DevTool;
+
+const CardInfoContainer = styled.div`
+  cursor: pointer;
+`;
 
 const Category = styled.span`
   width: 70px;
