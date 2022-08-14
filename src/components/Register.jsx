@@ -1,30 +1,30 @@
-import { useState } from 'react';
-import styled from 'styled-components';
-import { useNavigate } from 'react-router-dom';
-import Btn from './elements/Btn';
-import Input from './elements/Input';
+import { useState } from "react";
+import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
+import Btn from "./elements/Btn";
+import Input from "./elements/Input";
 import {
   BsFillEyeFill,
   BsFillEyeSlashFill,
   BsCheck2Circle,
-} from 'react-icons/bs';
-import useInput from 'hooks/useInput';
-import formValidator from 'utils/formValidator';
-import { css } from 'styled-components';
-import { colors } from 'styles/theme';
+} from "react-icons/bs";
+import useInput from "hooks/useInput";
+// import formValidator from "utils/formValidator";
+import { css } from "styled-components";
+import { colors } from "styles/theme";
 
 const Register = () => {
   const navigate = useNavigate();
   const [isVisible, setIsVisible] = useState(false);
-  const [userId, userIdHandler, userIdReset] = useInput('');
-  const [password, passwordHandler, passwordReset] = useInput('');
+  const [userId, userIdHandler, userIdReset] = useInput("");
+  const [password, passwordHandler, passwordReset] = useInput("");
   // const [userId, userIdHandler, userIdReset] = useInput('');
   const [checkDuplicate, setCheckDuplicate] = useState(false);
   const [isPassed, setIsPassed] = useState(true);
 
   const duplicateMessage = {
-    passed: '사용 가능한 아이디입니다.',
-    notPassed: '이미 사용 중인 아이디입니다.',
+    passed: "사용 가능한 아이디입니다.",
+    notPassed: "이미 사용 중인 아이디입니다.",
   };
 
   const handleSubmit = (e) => {
@@ -65,7 +65,7 @@ const Register = () => {
               labelText="password"
               id="userPassword"
               size="medium"
-              type={isVisible ? 'text' : 'password'}
+              type={isVisible ? "text" : "password"}
               name="password"
               placeHolderText="비밀번호를 입력해 주세요."
               value={password}
@@ -89,9 +89,9 @@ const Register = () => {
           <Btn
             size="large"
             variant="black_outline"
-            onClickHandler={() => navigate('/login')}
+            onClickHandler={() => navigate("/login")}
           >
-            {' '}
+            {" "}
             뒤로 가기
           </Btn>
         </ButtonContainer>
