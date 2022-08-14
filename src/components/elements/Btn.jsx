@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import Button from 'react-bootstrap/Button';
+// import Button from 'react-bootstrap/Button';
 import { colors } from 'styles/theme';
 import { css } from 'styled-components';
 
@@ -7,7 +7,6 @@ import { css } from 'styled-components';
 // large
 // medium
 // small
-// text
 
 /* variant -------------------------------------------------------------------- */
 // disabled
@@ -18,11 +17,14 @@ import { css } from 'styled-components';
 // red_filled
 // green_outline
 // green_filled
+// text
 
-const Btn = ({ children, variant, size, margin, onClickHandler }) => {
+const Btn = ({ children, variant, size, margin, onClickHandler, isAble }) => {
   return (
-    <StyledBtn variant={variant} size={size} margin={margin}>
-      <Button onClick={onClickHandler}>{children}</Button>
+    <StyledBtn margin={margin} size={size}>
+      <Button variant={variant} onClick={onClickHandler} disabled={isAble}>
+        {children}
+      </Button>
     </StyledBtn>
   );
 };
@@ -38,172 +40,105 @@ Btn.defaultProps = {
 export default Btn;
 
 const StyledBtn = styled.div`
-  width: ${({ size }) => {
-    if (size === 'large') return '360px';
-    else if (size === 'medium') return '95px';
-    else if (size === 'small') return '80px';
-    else if (size === 'text') return '100px';
-  }};
+  display: flex;
 
-  button {
-    width: 100%;
-
-    :hover {
-      background-color: inherit;
-      color: inherit;
-      border-color: inherit;
-    }
-  }
-
-  ${({ variant }) => {
-    return (
-      variant === 'blue_outline' &&
-      css`
-        button {
-          background-color: ${colors.white};
-          color: ${colors.blue};
-          border-color: ${colors.blue};
-        }
-      `
-    );
-  }}
-
-  ${({ variant }) => {
-    return (
-      variant === 'red_outline' &&
-      css`
-        button {
-          background-color: ${colors.white};
-          color: ${colors.red};
-          border-color: ${colors.red};
-        }
-      `
-    );
-  }}
-
-  ${({ variant }) => {
-    return (
-      variant === 'green_outline' &&
-      css`
-        button {
-          background-color: ${colors.white};
-          color: ${colors.green1};
-          border-color: ${colors.green1};
-        }
-      `
-    );
-  }}
-
-  ${({ variant }) => {
-    return (
-      variant === 'blue_filled' &&
-      css`
-        button {
-          background-color: ${colors.blue};
-          color: ${colors.white};
-          border-color: ${colors.blue};
-          :hover {
-            background-color: inherit;
-            color: inherit;
-            border-color: inherit;
-          }
-        }
-      `
-    );
-  }}
-
-  ${({ variant }) => {
-    return (
-      variant === 'red_filled' &&
-      css`
-        button {
-          background-color: ${colors.red};
-          color: ${colors.white};
-          border-color: ${colors.red};
-        }
-      `
-    );
-  }}
-
-${({ variant }) => {
-    return (
-      variant === 'green_filled' &&
-      css`
-        button {
-          background-color: ${colors.green1};
-          color: ${colors.white};
-          border-color: ${colors.green1};
-        }
-      `
-    );
-  }}  
-  
-  ${({ variant }) => {
-    return (
-      variant === 'black_outline' &&
-      css`
-        button {
-          background-color: ${colors.white};
-          color: ${colors.black};
-          border-color: ${colors.black};
-        }
-      `
-    );
-  }}
-
-${({ size }) => {
-    return (
-      size === 'large' &&
-      css`
-        button {
+  ${({ size }) => {
+    switch (size) {
+      case 'large':
+        return css`
           width: 360px;
           height: 45px;
-        }
-      `
-    );
-  }}
-
-${({ size }) => {
-    return (
-      size === 'medium' &&
-      css`
-        button {
-          width: 90px;
+          font-size: 16px;
+        `;
+      case 'medium':
+        return css`
+          width: 95px;
           height: 40px;
-        }
-      `
-    );
-  }}
-
-${({ size }) => {
-    return (
-      size === 'small' &&
-      css`
-        button {
+          font-size: 14px;
+        `;
+      case 'small':
+        return css`
           width: 80px;
-          height: 30px;
-        }
-      `
-    );
+          height: 32px;
+          font-size: 14px;
+        `;
+      default:
+        return;
+    }
   }}
+`;
 
-${({ size }) => {
-    return (
-      size === 'text' &&
-      css`
-        button {
-          width: 90px;
-          height: 30px;
+const Button = styled.button`
+  width: 100%;
+  height: 100%;
+  border-radius: 0.375rem;
+  font-weight: 600;
+
+  ${({ variant }) => {
+    switch (variant) {
+      case 'disabled':
+        return css`
           border: none;
-          background-color: transparent;
+          background: ${colors.gray2};
+          color: ${colors.white};
+        `;
+      case 'black_outline':
+        return css`
+          border: 1px solid ${colors.black};
+          background: ${colors.white};
+          color: ${colors.black};
+        `;
+      case 'blue_outline':
+        return css`
+          border: 1px solid ${colors.blue};
+          background: ${colors.white};
+          color: ${colors.blue};
+        `;
+      case 'blue_filled':
+        return css`
+          border: none;
+          background: ${colors.blue};
+          color: ${colors.white};
+        `;
+      case 'red_outline':
+        return css`
+          border: 1px solid ${colors.red};
+          background: ${colors.white};
+          color: ${colors.red};
+        `;
+      case 'red_filled':
+        return css`
+          border: none;
 
-          :hover,
-          :focus {
-            outline: none;
-            border: none;
-          }
-        }
-      `
-    );
+          background: ${colors.red};
+          color: ${colors.white};
+        `;
+      case 'green_outline':
+        return css`
+          border: 1px solid ${colors.green1};
+          background: ${colors.white};
+          color: ${colors.green1};
+        `;
+      case 'green_filled':
+        return css`
+          border: none;
+          background: ${colors.green1};
+          color: ${colors.white};
+        `;
+      case 'text':
+        return css`
+          border: none;
+          background: transparent;
+          color: ${colors.black};
+        `;
+      default:
+        return;
+    }
   }}
+
+  :disabled {
+    cursor: not-allowed;
+    background-color: ${colors.gray2};
+    color: ${colors.white};
+  }
 `;
