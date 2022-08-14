@@ -8,6 +8,7 @@ import { useState, useEffect } from "react";
 import Btn from "./elements/Btn";
 import { useDispatch } from "react-redux";
 import { __postDevTools } from "redux/modules/devToolsSlice";
+import { useNavigate } from "react-router-dom";
 
 const Form = () => {
   const [option, setOption] = useState("");
@@ -15,6 +16,7 @@ const Form = () => {
   const [content, setContent] = useState();
   // const [post, setPost] = useState({});
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const onChangeTitleHanlder = (e) => {
     setTitle(e.target.value);
@@ -94,7 +96,12 @@ const Form = () => {
         >
           작성완료
         </Btn>
-        <Btn variant="black_outline" color={colors.black} size="large">
+        <Btn
+          variant="black_outline"
+          color={colors.black}
+          size="large"
+          onClickHandler={() => navigate("/")}
+        >
           나가기
         </Btn>
       </StBottomButtonBox>
