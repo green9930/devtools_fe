@@ -12,11 +12,21 @@ import { useNavigate } from "react-router-dom";
 
 const Form = () => {
   const [option, setOption] = useState("");
-  const [title, setTitle] = useState();
-  const [content, setContent] = useState();
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
   // const [post, setPost] = useState({});
+  const [optionAlert, setOptionAlert] = useState("");
+  const [titleAlert, setTitleAlert] = useState("");
+  const [contentAlert, setContentAlert] = useState("");
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const alertMessage = {
+    optionAlert: "분류를 선택하세요",
+    titleAlert: "제목을 입력하세요",
+    contentAlert: "내용을 입력하세요",
+  };
 
   const onChangeTitleHanlder = (e) => {
     setTitle(e.target.value);
@@ -32,8 +42,25 @@ const Form = () => {
   // console.log("title", title);
   // console.log("content", content);
 
-  const onClickCreateHandler = () => {
+  const onClickCreateHandler = (e) => {
     // console.log("작성완료버튼 동작");
+    // 분류, 제목, 내용 하나라도 입력하지 않았을 때 dispatch 하지 않음
+    e.preventDefault();
+    if (option == "") {
+      return setOptionAlert(alertMessage.optionAlert);
+    } else {
+      setOptionAlert("");
+    }
+    if (title == "") {
+      return setTitleAlert(alertMessage.titleAlert);
+    } else {
+      setTitleAlert("");
+    }
+    if (content == "") {
+      return setContentAlert(alertMessage.contentAlert);
+    } else {
+      setContentAlert("");
+    }
 
     dispatch(
       __postDevTools({
@@ -106,8 +133,9 @@ const Form = () => {
         </Btn>
       </StBottomButtonBox>
       <StMsgBox>
-        <StMsg>제목을 입력해 주세요.</StMsg>
-        <StMsg>내용을 입력해 주세요.</StMsg>
+        <StMsg>{optionAlert}</StMsg>
+        <StMsg>{titleAlert}</StMsg>
+        <StMsg>{contentAlert}</StMsg>
       </StMsgBox>
     </div>
   );
