@@ -3,7 +3,7 @@ import { colors } from 'styles/theme';
 
 const GlobalStyle = createGlobalStyle`
   * {
-    font-size: 18px;
+    font-size: 16px;
     box-sizing: border-box;
     font-family: 'Noto Sans KR', sans-serif;
   }
@@ -35,7 +35,7 @@ const GlobalStyle = createGlobalStyle`
   }
 
   p {
-    font-size: 18px;
+    font-size: 16px;
     margin: 0;
   }
 
