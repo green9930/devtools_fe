@@ -1,13 +1,11 @@
 import Layout from 'components/layout/Layout';
 import Comment from 'components/Comment';
-import DetailEditor from 'components/DetailEditor';
-import DetailViewer from 'components/DetailViewer';
+import Detail from 'components/Detail';
 
 const DetailPage = () => {
   return (
     <Layout>
-      <DetailViewer />
-      <DetailEditor />
+      <Detail />
       <Comment />
     </Layout>
   );

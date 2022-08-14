@@ -70,7 +70,7 @@ const StTopDiv = styled.div`
   align-items: center;
   justify-content: center;
   gap: 29px;
-  margin-top: 240px;
+  margin-top: 100px;
 `;
 
 const StDropdown = styled(Dropdown.Toggle)`

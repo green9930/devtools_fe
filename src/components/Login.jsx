@@ -53,7 +53,7 @@ const LoginContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 40px;
-  margin-top: 240px;
+  margin-top: 200px;
 `;
 
 const InputContainer = styled.div`
@@ -65,6 +65,6 @@ const InputContainer = styled.div`
 const ButtonContainer = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: center;
   gap: 20px;
-  /* max-width: 360px; */
 `;
