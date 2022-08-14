@@ -22,7 +22,7 @@ const GlobalStyle = createGlobalStyle`
 
   h2 {
     margin: 0;
-    font-size: 32px;
+    font-size: 24px;
   }
 
   h3 {
