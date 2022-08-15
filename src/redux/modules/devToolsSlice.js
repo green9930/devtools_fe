@@ -1,5 +1,6 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import axios from 'axios';
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import axios from "axios";
+import RESP from "mockAPI/reponse";
 
 const initialState = {
   devtools: [],
@@ -8,11 +9,13 @@ const initialState = {
 };
 
 export const __postDevTools = createAsyncThunk(
-  'postDevTools',
+  "postDevTools",
   async (payload, thunkAPI) => {
     try {
-      const response = await axios.post('', payload);
-      return thunkAPI.fulfillWithValue(response.data);
+      console.log("payload", payload);
+      // const response = await axios.post('', payload);
+      const response = await axios.post(RESP, payload); //mock API 불가
+      return thunkAPI.fulfillWithValue(response);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }
@@ -20,11 +23,13 @@ export const __postDevTools = createAsyncThunk(
 );
 
 export const __getDevTools = createAsyncThunk(
-  'getDevTools',
+  "getDevTools",
   async (payload, thunkAPI) => {
     try {
-      const response = await axios.get('');
-      return thunkAPI.fulfillWithValue(response.data);
+      // const response = await axios.get("");
+      const response = RESP; // mok API
+      // return thunkAPI.fulfillWithValue(response.data);
+      return thunkAPI.fulfillWithValue(response); //mok API
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }
@@ -32,7 +37,7 @@ export const __getDevTools = createAsyncThunk(
 );
 
 export const __updateDevTools = createAsyncThunk(
-  'updateDevTools',
+  "updateDevTools",
   async (payload, thunkAPI) => {
     try {
       await axios.patch(``, {
@@ -46,7 +51,7 @@ export const __updateDevTools = createAsyncThunk(
 );
 
 export const __deleteDevTools = createAsyncThunk(
-  'deleteDevTools',
+  "deleteDevTools",
   async (payload, thunkAPI) => {
     try {
       await axios.delete(``);
@@ -58,7 +63,7 @@ export const __deleteDevTools = createAsyncThunk(
 );
 
 export const devToolsSlice = createSlice({
-  name: 'devToolsSlice',
+  name: "devToolsSlice",
   initialState,
   reducers: {},
   extraReducers: {
@@ -67,7 +72,7 @@ export const devToolsSlice = createSlice({
     },
     [__postDevTools.fulfilled]: (state, action) => {
       state.isLoading = false;
-      console.log('POST DEVTOOLS', action);
+      console.log("POST DEVTOOLS", action);
     },
     [__postDevTools.rejected]: (state, action) => {
       state.isLoading = false;
@@ -78,7 +83,8 @@ export const devToolsSlice = createSlice({
     },
     [__getDevTools.fulfilled]: (state, action) => {
       state.isLoading = false;
-      console.log('GET DEVTOOLS', action);
+      console.log("GET DEVTOOLS", action.payload);
+      state.devtools = action.payload;
     },
     [__getDevTools.rejected]: (state, { payload }) => {
       state.isLoading = false;
@@ -89,7 +95,7 @@ export const devToolsSlice = createSlice({
     },
     [__updateDevTools.fulfilled]: (state, { payload }) => {
       state.isLoading = false;
-      console.log('UPDATE DEVTOOLS', payload);
+      console.log("UPDATE DEVTOOLS", payload);
     },
     [__updateDevTools.rejected]: (state, { payload }) => {
       state.isLoading = false;
@@ -100,7 +106,7 @@ export const devToolsSlice = createSlice({
     },
     [__deleteDevTools.fulfilled]: (state, { payload }) => {
       state.isLoading = false;
-      console.log('DELETE DEVTOOLS', payload);
+      console.log("DELETE DEVTOOLS", payload);
     },
     [__deleteDevTools.rejected]: () => {},
   },

@@ -1,49 +1,56 @@
-// HotDeal.jsx
-// const resp = await axios.get('EC2IP:8000/api/hotdeals')
-// const resp = RESP.HOTDEALS;
-// response.js
 const RESP = [
   {
-    id: 1,
+    id: 1, //백엔드에서 자동으로 추가?
     title: "제목1",
-    content: "",
-    username: "username1",
-    category: "하드웨어",
+    content: "내용1",
+    username: "admin1",
+    category: "HW",
     createAt: "2022년 8월 12일 3시 33분",
+    isMyArticles: false,
   },
   {
-    id: 2,
+    id: 2, //백엔드에서 자동으로 추가?
     title: "제목2",
-    content: "",
-    username: "username2",
-    category: "소프트웨어",
+    content: "내용2",
+    username: "admin2",
+    category: "SW",
     createAt: "2022년 8월 12일 3시 33분",
+    isMyArticles: false,
   },
   {
-    id: 3,
+    id: 3, //백엔드에서 자동으로 추가?
     title: "제목3",
-    content: "",
-    username: "username3",
-    category: "하드웨어",
-    createAt: "2022년 8월 12일 3시 35분",
+    content: "내용3",
+    username: "admin3",
+    category: "HW",
+    createAt: "2022년 8월 12일 3시 33분",
     isMyArticles: false,
   },
   {
-    id: 4,
+    id: 4, //백엔드에서 자동으로 추가?
     title: "제목4",
-    content: "",
-    username: "username4",
-    category: "소프트웨어",
-    createAt: "2022년 8월 12일 3시 35분",
+    content: "내용4",
+    username: "admin4",
+    category: "SW",
+    createAt: "2022년 8월 12일 3시 33분",
     isMyArticles: false,
   },
   {
-    id: 5,
+    id: 5, //백엔드에서 자동으로 추가?
     title: "제목5",
-    content: "",
-    username: "username5",
-    category: "하드웨어",
-    createAt: "2022년 8월 12일 3시 35분",
+    content: "내용5",
+    username: "admin5",
+    category: "HW",
+    createAt: "2022년 8월 12일 3시 33분",
+    isMyArticles: false,
+  },
+  {
+    id: 6, //백엔드에서 자동으로 추가?
+    title: "제목6",
+    content: "내용6",
+    username: "admin6",
+    category: "SW",
+    createAt: "2022년 8월 12일 3시 33분",
     isMyArticles: false,
   },
 ];
