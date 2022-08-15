@@ -1,23 +1,14 @@
 import styled from "styled-components";
 import Btn from "components/elements/Btn";
 import { colors } from "styles/theme";
-import { useParams, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { __deleteDevTools, __getDevTools } from "redux/modules/devToolsSlice";
 
-const DetailViewer = ({ handleEdit }) => {
+const DetailViewer = ({ handleEdit, devtool }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { devtools } = useSelector((state) => state.devTools);
-  let { id } = useParams();
-
-  // console.log("useParams.id", id);
-  console.log("devtools", devtools);
-
-  useEffect(() => {
-    dispatch(__getDevTools());
-  }, [dispatch]);
 
   const onClickDeleteHandler = (id) => {
     dispatch(__deleteDevTools(id));
@@ -28,71 +19,35 @@ const DetailViewer = ({ handleEdit }) => {
       <DevToolsHeaderContainer>
         <TitleContainer>
           <div>
-            <span>
-              {devtools.map((item) => {
-                if (item.id == +id) {
-                  if (item.category == "HW") {
-                    return "하드웨어";
-                  } else {
-                    return "소프트웨어";
-                  }
-                }
-              })}
-            </span>
+            <span>{devtool.category}</span>
           </div>
-          <h2>
-            {devtools.map((item) => {
-              if (item.id == +id) {
-                return item.title;
-              }
-            })}
-          </h2>
+          <h2>{devtool.title}</h2>
         </TitleContainer>
         <InfoContainer>
           <div>
-            <span>
-              {" "}
-              {devtools.map((item) => {
-                if (item.id == +id) {
-                  return item.username;
-                }
-              })}
-            </span>
+            <span> {devtool.username}</span>
           </div>
-          <StCreateAt>
-            {" "}
-            {devtools.map((item) => {
-              if (item.id == +id) {
-                return item.createAt;
-              }
-            })}
-          </StCreateAt>
+          <StCreateAt> {devtool.createAt}</StCreateAt>
         </InfoContainer>
         <ButtonContainer>
-          {devtools.map((item) => {
-            if (item.id == +id) {
-              return (
-                item.isMyArticles && (
-                  <AuthBtn key={item.id}>
-                    <Btn
-                      size="medium"
-                      variant="red_outline"
-                      onClickHandler={handleEdit}
-                    >
-                      수정하기
-                    </Btn>
-                    <Btn
-                      size="medium"
-                      variant="red_outline"
-                      onClickHandler={() => onClickDeleteHandler(item.id)}
-                    >
-                      삭제하기
-                    </Btn>
-                  </AuthBtn>
-                )
-              );
-            }
-          })}
+          {devtool.isMyArticles && (
+            <AuthBtn key={devtool.id}>
+              <Btn
+                size="medium"
+                variant="red_outline"
+                onClickHandler={handleEdit}
+              >
+                수정하기
+              </Btn>
+              <Btn
+                size="medium"
+                variant="red_outline"
+                onClickHandler={() => onClickDeleteHandler(devtool.id)}
+              >
+                삭제하기
+              </Btn>
+            </AuthBtn>
+          )}
 
           <Btn
             size="medium"
@@ -104,13 +59,7 @@ const DetailViewer = ({ handleEdit }) => {
         </ButtonContainer>
       </DevToolsHeaderContainer>
       <DevToolsContentContainer>
-        <p>
-          {devtools.map((item) => {
-            if (item.id == +id) {
-              return item.content;
-            }
-          })}
-        </p>
+        <p>{devtool.content}</p>
       </DevToolsContentContainer>
     </DevToolsContainer>
   );

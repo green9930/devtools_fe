@@ -7,12 +7,10 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { __updateDevTools } from "redux/modules/devToolsSlice";
 
-const DetailEditor = ({ handleEdit }) => {
-  const { devtools } = useSelector((state) => state.devTools);
+const DetailEditor = ({ handleEdit, devtool }) => {
   const [edit, setEdit] = useState();
   let { id } = useParams();
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const onChangeContentHandler = (e) => {
     console.log(e.target.value);
@@ -30,41 +28,19 @@ const DetailEditor = ({ handleEdit }) => {
       <DevToolsHeaderContainer>
         <TitleContainer>
           <div>
-            <span>
-              {devtools.map((item) => {
-                if (item.id == +id) {
-                  if (item.category == "HW") {
-                    return "하드웨어";
-                  } else {
-                    return "소프트웨어";
-                  }
-                }
-              })}
-            </span>
+            <span>{devtool.category}</span>
           </div>
-          <h2>
-            {devtools.map((item) => {
-              if (item.id == +id) {
-                return item.title;
-              }
-            })}
-          </h2>
+          <h2>{devtool.title}</h2>
         </TitleContainer>
       </DevToolsHeaderContainer>
 
       <DevToolsContentContainer>
-        {devtools.map((item) => {
-          if (item.id == +id) {
-            return (
-              <TextArea
-                key={item.id}
-                height="400px"
-                defaultValue={item.content}
-                onChangeHandler={onChangeContentHandler}
-              />
-            );
-          }
-        })}
+        <TextArea
+          key={devtool.id}
+          height="400px"
+          defaultValue={devtool.content}
+          onChangeHandler={onChangeContentHandler}
+        />
       </DevToolsContentContainer>
 
       <BtnContainer>
@@ -98,7 +74,7 @@ const DevToolsHeaderContainer = styled.div`
 
 const TitleContainer = styled.div`
   display: flex;
-  align-items: center;
+  align-devtools: center;
   margin-bottom: 10px;
 
   div {

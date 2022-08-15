@@ -1,38 +1,50 @@
-import styled from 'styled-components';
-import { colors } from 'styles/theme';
+import { __getDetail } from "redux/modules/devToolsSlice";
+import styled from "styled-components";
+import { colors } from "styles/theme";
+import { useSelector, useDispatch } from "react-redux";
+import { useParams } from "react-router-dom";
+import { useState, useEffect } from "react";
 
 const CommentList = () => {
-  const comments = {
-    ok: true,
-    result: [
-      {
-        commentId: 1,
-        username: 'admin',
-        createAt: '2022년 8월 12일 3시 40분',
-        comment:
-          '댓글 최대 글자 수 확인 개발 어려워요 서버 연동 힘들어 유효성 검사해야',
-        articlesId: 10,
-      },
-      {
-        commentId: 2,
-        username: 'admin',
-        createAt: '2022년 8월 12일 3시 40분',
-        comment: '1234567890123456789012345678901234567890',
-        articlesId: 10,
-      },
-      {
-        commentId: 3,
-        username: 'admin',
-        createAt: '2022년 8월 12일 3시 40분',
-        comment: '안녕하세요',
-        articlesId: 10,
-      },
-    ],
-  };
+  const { id } = useParams();
+
+  const dispatch = useDispatch();
+
+  const { devtool } = useSelector((state) => state.devTools);
+
+  useEffect(() => {
+    dispatch(__getDetail(id));
+  }, []);
+  console.log(devtool);
+  const comments = [
+    {
+      commentId: 1,
+      username: "admin",
+      createAt: "2022년 8월 12일 3시 40분",
+      comment:
+        "댓글 최대 글자 수 확인 개발 어려워요 서버 연동 힘들어 유효성 검사해야",
+      articlesId: 10,
+    },
+    {
+      commentId: 2,
+      username: "admin",
+      createAt: "2022년 8월 12일 3시 40분",
+      comment: "1234567890123456789012345678901234567890",
+      articlesId: 10,
+    },
+    {
+      commentId: 3,
+      username: "admin",
+      createAt: "2022년 8월 12일 3시 40분",
+      comment: "안녕하세요",
+      articlesId: 10,
+    },
+  ];
 
   return (
     <CommentContainer>
-      {comments.result.map((val) => {
+      {devtool?.comments?.map((val) => {
+        console.log(devtool);
         const { commentId, username, createAt, comment, articlesId } = val;
         return (
           <ItemContainer key={commentId}>
