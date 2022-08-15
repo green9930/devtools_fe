@@ -2,27 +2,24 @@ import styled from "styled-components";
 import Btn from "components/elements/Btn";
 import { colors } from "styles/theme";
 import { useParams, useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { __getDevTools } from "redux/modules/devToolsSlice";
 
 const DetailViewer = ({ handleEdit }) => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const { devtools } = useSelector((state) => state.devTools);
   let { id } = useParams();
+
+  // console.log("useParams.id", id);
   console.log("devtools", devtools);
-  console.log("useParams", id);
 
-  /* DATA SAMPLE -------------------------------------------------------------- */
-  const devTools = {
-    title: "나만 아는 개발 꿀팁",
-    content: "에러를 많이 낸다!",
-    username: "테스트이름",
-    category: "소프트웨어", // 하드웨어 / 소프트웨어
-    createAt: "2022년 8월 12일 3시 35분",
-    isMyArticles: true, // true / false
-  };
+  useEffect(() => {
+    dispatch(__getDevTools());
+  }, [dispatch]);
 
-  const { title, content, username, category, createAt, isMyArticles } =
-    devTools;
+  const onClickDeleteHandler = () => {};
 
   return (
     <DevToolsContainer>
@@ -70,20 +67,31 @@ const DetailViewer = ({ handleEdit }) => {
           </StCreateAt>
         </InfoContainer>
         <ButtonContainer>
-          {isMyArticles && (
-            <AuthBtn>
-              <Btn
-                size="medium"
-                variant="red_outline"
-                onClickHandler={handleEdit}
-              >
-                수정하기
-              </Btn>
-              <Btn size="medium" variant="red_outline">
-                삭제하기
-              </Btn>
-            </AuthBtn>
-          )}
+          {devtools.map((item) => {
+            if (item.id == +id) {
+              return (
+                item.isMyArticles && (
+                  <AuthBtn key={item.id}>
+                    <Btn
+                      size="medium"
+                      variant="red_outline"
+                      onClickHandler={handleEdit}
+                    >
+                      수정하기
+                    </Btn>
+                    <Btn
+                      size="medium"
+                      variant="red_outline"
+                      onClickHandler={onClickDeleteHandler}
+                    >
+                      삭제하기
+                    </Btn>
+                  </AuthBtn>
+                )
+              );
+            }
+          })}
+
           <Btn
             size="medium"
             variant="blue_outline"

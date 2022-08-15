@@ -6,7 +6,7 @@ const RESP = [
     username: "admin1",
     category: "HW",
     createAt: "2022년 8월 12일 1시 11분",
-    isMyArticles: false,
+    isMyArticles: true,
   },
   {
     id: 2, //백엔드에서 자동으로 추가?
@@ -15,7 +15,7 @@ const RESP = [
     username: "admin2",
     category: "SW",
     createAt: "2022년 8월 12일 2시 22분",
-    isMyArticles: false,
+    isMyArticles: true,
   },
   {
     id: 3, //백엔드에서 자동으로 추가?
@@ -24,7 +24,7 @@ const RESP = [
     username: "admin3",
     category: "HW",
     createAt: "2022년 8월 12일 3시 33분",
-    isMyArticles: false,
+    isMyArticles: true,
   },
   {
     id: 4, //백엔드에서 자동으로 추가?
