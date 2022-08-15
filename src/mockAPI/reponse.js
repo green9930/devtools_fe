@@ -5,7 +5,7 @@ const RESP = [
     content: "내용1",
     username: "admin1",
     category: "HW",
-    createAt: "2022년 8월 12일 3시 33분",
+    createAt: "2022년 8월 12일 1시 11분",
     isMyArticles: false,
   },
   {
@@ -14,7 +14,7 @@ const RESP = [
     content: "내용2",
     username: "admin2",
     category: "SW",
-    createAt: "2022년 8월 12일 3시 33분",
+    createAt: "2022년 8월 12일 2시 22분",
     isMyArticles: false,
   },
   {
@@ -32,7 +32,7 @@ const RESP = [
     content: "내용4",
     username: "admin4",
     category: "SW",
-    createAt: "2022년 8월 12일 3시 33분",
+    createAt: "2022년 8월 12일 4시 44분",
     isMyArticles: false,
   },
   {
@@ -41,7 +41,7 @@ const RESP = [
     content: "내용5",
     username: "admin5",
     category: "HW",
-    createAt: "2022년 8월 12일 3시 33분",
+    createAt: "2022년 8월 12일 5시 55분",
     isMyArticles: false,
   },
   {
@@ -50,7 +50,7 @@ const RESP = [
     content: "내용6",
     username: "admin6",
     category: "SW",
-    createAt: "2022년 8월 12일 3시 33분",
+    createAt: "2022년 8월 12일 6시 00분",
     isMyArticles: false,
   },
 ];

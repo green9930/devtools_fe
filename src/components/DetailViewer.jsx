@@ -1,17 +1,23 @@
-import styled from 'styled-components';
-import Btn from 'components/elements/Btn';
-import { colors } from 'styles/theme';
-import { useNavigate } from 'react-router-dom';
+import styled from "styled-components";
+import Btn from "components/elements/Btn";
+import { colors } from "styles/theme";
+import { useParams, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const DetailViewer = ({ handleEdit }) => {
   const navigate = useNavigate();
+  const { devtools } = useSelector((state) => state.devTools);
+  let { id } = useParams();
+  console.log("devtools", devtools);
+  console.log("useParams", id);
+
   /* DATA SAMPLE -------------------------------------------------------------- */
   const devTools = {
-    title: '나만 아는 개발 꿀팁',
-    content: '에러를 많이 낸다!',
-    username: '테스트이름',
-    category: '소프트웨어', // 하드웨어 / 소프트웨어
-    createAt: '2022년 8월 12일 3시 35분',
+    title: "나만 아는 개발 꿀팁",
+    content: "에러를 많이 낸다!",
+    username: "테스트이름",
+    category: "소프트웨어", // 하드웨어 / 소프트웨어
+    createAt: "2022년 8월 12일 3시 35분",
     isMyArticles: true, // true / false
   };
 
@@ -23,15 +29,45 @@ const DetailViewer = ({ handleEdit }) => {
       <DevToolsHeaderContainer>
         <TitleContainer>
           <div>
-            <span>{category}</span>
+            <span>
+              {devtools.map((item) => {
+                if (item.id == +id) {
+                  if (item.category == "HW") {
+                    return "하드웨어";
+                  } else {
+                    return "소프트웨어";
+                  }
+                }
+              })}
+            </span>
           </div>
-          <h2>{title}</h2>
+          <h2>
+            {devtools.map((item) => {
+              if (item.id == +id) {
+                return item.title;
+              }
+            })}
+          </h2>
         </TitleContainer>
         <InfoContainer>
           <div>
-            <span>{username}</span>
+            <span>
+              {" "}
+              {devtools.map((item) => {
+                if (item.id == +id) {
+                  return item.username;
+                }
+              })}
+            </span>
           </div>
-          <StCreateAt>{createAt}</StCreateAt>
+          <StCreateAt>
+            {" "}
+            {devtools.map((item) => {
+              if (item.id == +id) {
+                return item.createAt;
+              }
+            })}
+          </StCreateAt>
         </InfoContainer>
         <ButtonContainer>
           {isMyArticles && (
@@ -51,14 +87,20 @@ const DetailViewer = ({ handleEdit }) => {
           <Btn
             size="medium"
             variant="blue_outline"
-            onClickHandler={() => navigate('/')}
+            onClickHandler={() => navigate("/")}
           >
             목록으로
           </Btn>
         </ButtonContainer>
       </DevToolsHeaderContainer>
       <DevToolsContentContainer>
-        <p>{content}</p>
+        <p>
+          {devtools.map((item) => {
+            if (item.id == +id) {
+              return item.content;
+            }
+          })}
+        </p>
       </DevToolsContentContainer>
     </DevToolsContainer>
   );

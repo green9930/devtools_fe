@@ -9,18 +9,21 @@ import { useNavigate } from "react-router-dom";
 const DevTool = (props) => {
   const navigate = useNavigate();
 
-  /* FAKE ID ------------------------------------------------------------------ */
-  const id = 1;
+  // /* FAKE ID ------------------------------------------------------------------ */
+  // const id = 1;
 
   return (
     <div>
-      <Card style={{ width: "347px", height: "398px" }}>
+      <Card
+        style={{ width: "347px", height: "398px" }}
+        onClick={() => navigate(`/detail/${props.item.id}`)}
+      >
         {props.item.category == "HW" ? (
           <Card.Img variant="top" src={HW} />
         ) : (
           <Card.Img variant="top" src={SW} />
         )}
-        <CardInfoContainer onClick={() => navigate(`/detail/${id}`)}>
+        <CardInfoContainer>
           <CardTop>
             <Card.Title>
               <Category>
