@@ -4,7 +4,7 @@ import { colors } from "styles/theme";
 import { useParams, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { __getDevTools } from "redux/modules/devToolsSlice";
+import { __deleteDevTools, __getDevTools } from "redux/modules/devToolsSlice";
 
 const DetailViewer = ({ handleEdit }) => {
   const navigate = useNavigate();
@@ -19,7 +19,9 @@ const DetailViewer = ({ handleEdit }) => {
     dispatch(__getDevTools());
   }, [dispatch]);
 
-  const onClickDeleteHandler = () => {};
+  const onClickDeleteHandler = (id) => {
+    dispatch(__deleteDevTools(id));
+  };
 
   return (
     <DevToolsContainer>
@@ -82,7 +84,7 @@ const DetailViewer = ({ handleEdit }) => {
                     <Btn
                       size="medium"
                       variant="red_outline"
-                      onClickHandler={onClickDeleteHandler}
+                      onClickHandler={() => onClickDeleteHandler(item.id)}
                     >
                       삭제하기
                     </Btn>

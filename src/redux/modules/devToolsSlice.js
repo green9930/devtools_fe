@@ -55,7 +55,8 @@ export const __deleteDevTools = createAsyncThunk(
   "deleteDevTools",
   async (payload, thunkAPI) => {
     try {
-      await axios.delete(``);
+      console.log("__deleteDevTools", payload);
+      await axios.delete(`url/${payload}`);
       return thunkAPI.fulfillWithValue(payload);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
