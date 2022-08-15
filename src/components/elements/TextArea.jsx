@@ -4,10 +4,10 @@ import Form from "react-bootstrap/Form";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { colors } from "styles/theme";
 
-const TextArea = ({ width, margin, height, border }) => {
+const TextArea = ({ width, margin, height, border, onChangeHandler }) => {
   return (
     <>
-      <MyButton
+      <StTextArea
         width={width}
         margin={margin}
         controlId="floatingTextarea2"
@@ -18,17 +18,20 @@ const TextArea = ({ width, margin, height, border }) => {
           placeholder="Leave a comment here"
           style={{ height: height }}
           borer={border}
+          onChange={onChangeHandler}
         />
-      </MyButton>
+      </StTextArea>
     </>
   );
 };
 
 export default TextArea;
 
-const MyButton = styled(FloatingLabel)(({ width, margin, height, border }) => ({
-  width: width || "auto",
-  color: "black",
-  margin: margin || "auto",
-  height: height,
-}));
+const StTextArea = styled(FloatingLabel)(
+  ({ width, margin, height, border }) => ({
+    width: width || "auto",
+    color: "black",
+    margin: margin || "auto",
+    height: height,
+  })
+);
