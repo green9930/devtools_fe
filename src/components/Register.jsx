@@ -67,6 +67,16 @@ const Register = () => {
     }
   };
 
+  const handleChangePassword = (e) => {
+    const { value, name } = e.target;
+
+    setUser({ ...user, password: value });
+    if (regExpVali(value, name)) {
+      setUsernameMessage('올바른 비밀번호 형식입니다.');
+      setIsPasswordAvailable(true);
+    }
+  };
+
   return (
     <div>
       <form>
@@ -110,7 +120,7 @@ const Register = () => {
                 name="password"
                 placeHolderText="비밀번호를 입력해 주세요."
                 value={user.password}
-                // onChangeHandler={handleChange}
+                onChangeHandler={handleChangePassword}
               />
               <span onClick={() => setIsVisible(!isVisible)}>
                 {isVisible ? <BsFillEyeSlashFill /> : <BsFillEyeFill />}
