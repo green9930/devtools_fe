@@ -46,7 +46,7 @@ Input.defaultProps = {
   value: '',
   placeHolderText: '내용을 입력해주세요',
   isVisible: false,
-  isValid: 'invalid',
+  isValid: 'normal',
   onChangeHandler: null,
 };
 

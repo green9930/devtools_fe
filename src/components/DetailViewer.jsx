@@ -1,8 +1,10 @@
 import styled from 'styled-components';
 import Btn from 'components/elements/Btn';
 import { colors } from 'styles/theme';
+import { useNavigate } from 'react-router-dom';
 
 const DetailViewer = ({ handleEdit }) => {
+  const navigate = useNavigate();
   /* DATA SAMPLE -------------------------------------------------------------- */
   const devTools = {
     title: '나만 아는 개발 꿀팁',
@@ -46,7 +48,11 @@ const DetailViewer = ({ handleEdit }) => {
               </Btn>
             </AuthBtn>
           )}
-          <Btn size="medium" variant="blue_outline">
+          <Btn
+            size="medium"
+            variant="blue_outline"
+            onClickHandler={() => navigate('/')}
+          >
             목록으로
           </Btn>
         </ButtonContainer>

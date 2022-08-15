@@ -19,10 +19,23 @@ import { css } from "styled-components";
 // green_filled
 // text
 
-const Btn = ({ children, variant, size, margin, onClickHandler, isAble }) => {
+const Btn = ({
+  children,
+  type,
+  variant,
+  size,
+  margin,
+  onClickHandler,
+  isAble,
+}) => {
   return (
     <StyledBtn margin={margin} size={size}>
-      <Button variant={variant} onClick={onClickHandler} disabled={isAble}>
+      <Button
+        type={type}
+        variant={variant}
+        onClick={onClickHandler}
+        disabled={isAble}
+      >
         {children}
       </Button>
     </StyledBtn>
@@ -30,10 +43,11 @@ const Btn = ({ children, variant, size, margin, onClickHandler, isAble }) => {
 };
 
 Btn.defaultProps = {
-  children: "Button",
-  variant: "blue_filled",
-  size: "large",
-  margin: "auto",
+  children: 'Button',
+  type: 'button',
+  variant: 'blue_filled',
+  size: 'large',
+  margin: 'auto',
   onClickHandler: null,
 };
 
@@ -78,7 +92,7 @@ const Button = styled.button`
     switch (variant) {
       case "disabled":
         return css`
-          border: none;
+          border: 1px solid ${colors.gray2};
           background: ${colors.gray2};
           color: ${colors.white};
         `;
