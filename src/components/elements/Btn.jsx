@@ -1,7 +1,7 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 // import Button from "react-bootstrap/Button";
-import { colors } from "styles/theme";
-import { css } from "styled-components";
+import { colors } from 'styles/theme';
+import { css } from 'styled-components';
 
 /* size --------------------------------------------------------------------- */
 // large
@@ -58,19 +58,19 @@ const StyledBtn = styled.div`
 
   ${({ size }) => {
     switch (size) {
-      case "large":
+      case 'large':
         return css`
           width: 360px;
           height: 45px;
           font-size: 16px;
         `;
-      case "medium":
+      case 'medium':
         return css`
           width: 95px;
           height: 40px;
           font-size: 14px;
         `;
-      case "small":
+      case 'small':
         return css`
           width: 80px;
           height: 32px;
@@ -86,60 +86,60 @@ const Button = styled.button`
   width: 100%;
   height: 100%;
   border-radius: 0.375rem;
-  font-weight: 600;
+  font-weight: 500;
 
   ${({ variant }) => {
     switch (variant) {
-      case "disabled":
+      case 'disabled':
         return css`
           border: 1px solid ${colors.gray2};
-          background: ${colors.gray2};
+          background-color: ${colors.gray2};
           color: ${colors.white};
         `;
-      case "black_outline":
+      case 'black_outline':
         return css`
           border: 1px solid ${colors.black};
           background: ${colors.white};
           color: ${colors.black};
         `;
-      case "blue_outline":
+      case 'blue_outline':
         return css`
           border: 1px solid ${colors.blue};
           background: ${colors.white};
           color: ${colors.blue};
         `;
-      case "blue_filled":
+      case 'blue_filled':
         return css`
           border: none;
           background: ${colors.blue};
           color: ${colors.white};
         `;
-      case "red_outline":
+      case 'red_outline':
         return css`
           border: 1px solid ${colors.red};
           background: ${colors.white};
           color: ${colors.red};
         `;
-      case "red_filled":
+      case 'red_filled':
         return css`
           border: none;
 
           background: ${colors.red};
           color: ${colors.white};
         `;
-      case "green_outline":
+      case 'green_outline':
         return css`
           border: 1px solid ${colors.green1};
           background: ${colors.white};
           color: ${colors.green1};
         `;
-      case "green_filled":
+      case 'green_filled':
         return css`
           border: none;
           background: ${colors.green1};
           color: ${colors.white};
         `;
-      case "text":
+      case 'text':
         return css`
           border: none;
           background: transparent;
