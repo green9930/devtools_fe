@@ -64,13 +64,13 @@ const InputContainer = styled.div`
 
   input {
     border-color: ${({ isValid }) => {
-      if (isValid === 'normal') return `${colors.gray2}`;
+      if (isValid === 'normal') return `${colors.gray1}`;
       else if (isValid === 'valid') return `${colors.green1}`;
       else if (isValid === 'invalid') return `${colors.red}`;
     }};
 
     ::placeholder {
-      /* font-size: 14px; */
+      font-size: 14px;
     }
   }
 `;
