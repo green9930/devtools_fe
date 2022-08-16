@@ -1,10 +1,10 @@
-import styled from "styled-components";
-import Btn from "components/elements/Btn";
-import { colors } from "styles/theme";
-import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
-import { __deleteDevTools, __getDevTools } from "redux/modules/devToolsSlice";
+import styled from 'styled-components';
+import Btn from 'components/elements/Btn';
+import { colors } from 'styles/theme';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { __deleteDevTools, __getDevTools } from 'redux/modules/devToolsSlice';
 
 const DetailViewer = ({ handleEdit, devtool }) => {
   const navigate = useNavigate();
@@ -52,7 +52,7 @@ const DetailViewer = ({ handleEdit, devtool }) => {
           <Btn
             size="medium"
             variant="blue_outline"
-            onClickHandler={() => navigate("/")}
+            onClickHandler={() => navigate('/')}
           >
             목록으로
           </Btn>
@@ -97,7 +97,6 @@ const TitleContainer = styled.div`
   }
   h2 {
     color: ${colors.black};
-    margin-left: ;
   }
 `;
 
