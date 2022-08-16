@@ -1,27 +1,41 @@
-import { useState } from 'react';
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import Btn from 'components/elements/Btn';
 import devtools_title from 'assets/devtools_title.svg';
 import { colors } from 'styles/theme';
+import { useDispatch, useSelector } from 'react-redux';
+import { userActions } from 'redux/modules/userSlice';
 
 const NavBar = () => {
-  const [isAuth, setIsAuth] = useState(true);
-  // isAuth === true : 회원
-  // isAuth === false : 비회원
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-  const handleLogout = () => {
-    document.cookie = `mycookie=; expires=${new Date(
-      '2022-01-01'
-    ).toUTCString()}`;
-    navigate('/login');
-  };
+  const { username, isLogin, isLoading, error } = useSelector(
+    (state) => state.user
+  );
 
-  const name = 'username';
+  console.log('USER', username, 'ISLOGIN', isLogin);
+
+  useEffect(() => {
+    dispatch(userActions.getUser());
+  }, [dispatch]);
+
+  const handleLogout = () =>
+    dispatch(userActions.deleteUser()).then(() => navigate('/'));
+
+  if (isLoading)
+    return (
+      <NavBarContainer>
+        <Logocontainer onClick={() => navigate('/')}>
+          <StyledImg src={devtools_title} alt="logo" />
+        </Logocontainer>
+      </NavBarContainer>
+    );
+
   return (
     <NavBarContainer>
-      {isAuth ? (
+      {username ? (
         <Btn
           size="small"
           variant="text"
@@ -33,9 +47,9 @@ const NavBar = () => {
       <Logocontainer onClick={() => navigate('/')}>
         <StyledImg src={devtools_title} alt="logo" />
       </Logocontainer>
-      {isAuth ? (
+      {username ? (
         <InfoContainer>
-          <span>{name}님, 안녕하세요</span>
+          <span>{username}님, 안녕하세요</span>
           <Btn size="small" variant="text" onClickHandler={handleLogout}>
             로그아웃
           </Btn>
@@ -73,6 +87,10 @@ const InfoContainer = styled.div`
   display: flex;
   align-items: center;
   gap: 30px;
+
+  span {
+    font-weight: 500;
+  }
 `;
 
 const StyledImg = styled.img`
