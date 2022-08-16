@@ -9,11 +9,6 @@ import axios from 'axios';
 import { BsFillEyeFill, BsFillEyeSlashFill } from 'react-icons/bs';
 
 const Register = () => {
-  /* TEST DATA ---------------------------------------------------------------- */
-  const test = {
-    username: 'aaaaa',
-  };
-
   const navigate = useNavigate();
 
   /* USER 객체 ------------------------------------------------------------------ */
@@ -47,7 +42,7 @@ const Register = () => {
   /* 입력한 비밀번호 보기 -------------------------------------------------------------- */
   const [isVisible, setIsVisible] = useState(false);
 
-  /* 회원가입 --------------------------------------------------------------------- */
+  /* REGISTER ----------------------------------------------------------------- */
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log('isUsernameAvailable', isUsernameAvailable);
@@ -55,8 +50,8 @@ const Register = () => {
     console.log('isPasswordConfirmed', isPasswordConfirmed);
     try {
       console.log('USER', user);
-      // const res = await axios.post(`http://3.34.185.48/api/signup`, user);
-      // console.log(res);
+      const res = await axios.post(`http://3.34.185.48/api/register`, user);
+      console.log(res);
       navigate('/login');
     } catch (error) {
       console.error(error);
@@ -83,19 +78,19 @@ const Register = () => {
 
   /* 아이디 중복 검사 ---------------------------------------------------------------- */
   const handleCheckDuplicate = async () => {
-    // const res = await axios.post(`http://3.34.185.48/api/register/username`, {
-    //   username: user.username,
-    // });
+    const res = await axios.post(`http://3.34.185.48/api/register/username`, {
+      username: user.username,
+    });
 
-    if (user.username === test.username) {
-      setUsernameMessage('이미 사용 중인 아이디입니다.');
-      setIsUsernameAvailable(false);
-      setCheckDuplicate(false);
-    } else {
+    if (res.data) {
       setUsernameMessage('사용 가능한 아이디입니다');
       setIsUsernameAvailable(true);
       setCheckDuplicate(true);
       setIsUsernameActive(false);
+    } else {
+      setUsernameMessage('이미 사용 중인 아이디입니다.');
+      setIsUsernameAvailable(false);
+      setCheckDuplicate(false);
     }
   };
 
