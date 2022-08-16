@@ -1,7 +1,7 @@
-import { Form } from 'react-bootstrap';
-import styled from 'styled-components';
-import { a11yHidden } from 'styles/mixin';
-import { colors } from 'styles/theme';
+import { Form } from "react-bootstrap";
+import styled from "styled-components";
+import { a11yHidden } from "styles/mixin";
+import { colors } from "styles/theme";
 
 const Input = ({
   labelText,
@@ -14,10 +14,12 @@ const Input = ({
   isValid,
   onChangeHandler,
   value,
+  maxLength,
+  minLength,
 }) => {
   return (
     <InputContainer size={size} isValid={isValid}>
-      <Form.Label className={isVisible ? '' : 'a11y-hidden'} htmlFor={id}>
+      <Form.Label className={isVisible ? "" : "a11y-hidden"} htmlFor={id}>
         {labelText}
       </Form.Label>
       <Form.Control
@@ -27,6 +29,8 @@ const Input = ({
         value={value}
         placeholder={placeHolderText}
         onChange={onChangeHandler}
+        maxLength={maxLength}
+        minLength={minLength}
       />
     </InputContainer>
   );
@@ -38,15 +42,15 @@ const Input = ({
 // invalid
 
 Input.defaultProps = {
-  labelText: 'label',
-  id: '',
-  size: 'medium',
-  type: 'text',
-  name: '',
-  value: '',
-  placeHolderText: '내용을 입력해주세요',
+  labelText: "label",
+  id: "",
+  size: "medium",
+  type: "text",
+  name: "",
+  value: "",
+  placeHolderText: "내용을 입력해주세요",
   isVisible: false,
-  isValid: 'normal',
+  isValid: "normal",
   onChangeHandler: null,
 };
 
@@ -58,15 +62,15 @@ const InputContainer = styled.div`
   }
 
   width: ${({ size }) => {
-    if (size === 'medium') return '360px';
-    else if (size === 'large') return '680px';
+    if (size === "medium") return "360px";
+    else if (size === "large") return "680px";
   }};
 
   input {
     border-color: ${({ isValid }) => {
-      if (isValid === 'normal') return `${colors.gray1}`;
-      else if (isValid === 'valid') return `${colors.green1}`;
-      else if (isValid === 'invalid') return `${colors.red}`;
+      if (isValid === "normal") return `${colors.gray2}`;
+      else if (isValid === "valid") return `${colors.green1}`;
+      else if (isValid === "invalid") return `${colors.red}`;
     }};
 
     ::placeholder {

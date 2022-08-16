@@ -18,7 +18,7 @@ const DevTool = (props) => {
         style={{ width: "347px", height: "398px", cursor: "pointer" }}
         onClick={() => navigate(`/detail/${props.item.id}`)}
       >
-        {props.item.category === "HW" ? (
+        {props.item.category === "하드웨어" ? (
           <Card.Img variant="top" src={HW} />
         ) : (
           <Card.Img variant="top" src={SW} />
@@ -27,7 +27,9 @@ const DevTool = (props) => {
           <CardTop>
             <Card.Title>
               <Category>
-                [{props.item.category === "HW" ? "하드웨어" : "소프트웨어"}]
+                [
+                {props.item.category === "하드웨어" ? "하드웨어" : "소프트웨어"}
+                ]
               </Category>
               <Title> {props.item.title}</Title>
             </Card.Title>

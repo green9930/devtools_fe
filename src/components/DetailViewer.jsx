@@ -12,6 +12,7 @@ const DetailViewer = ({ handleEdit, devtool }) => {
 
   const onClickDeleteHandler = (id) => {
     dispatch(__deleteDevTools(id));
+    navigate("/");
   };
 
   return (

@@ -14,9 +14,12 @@ export const __postDevTools = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       console.log("payload", payload);
-      // const response = await axios.post('', payload);
-      const response = await axios.post(RESP, payload); //mock API 불가
-      return thunkAPI.fulfillWithValue(response);
+      const response = await axios.post(
+        "http://3.34.185.48:8080/api/articles/",
+        payload
+      );
+      // const response = await axios.post(RESP, payload); //mock API 불가
+      return thunkAPI.fulfillWithValue(response.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }
@@ -27,10 +30,9 @@ export const __getDevTools = createAsyncThunk(
   "getDevTools",
   async (payload, thunkAPI) => {
     try {
-      // const response = await axios.get("");
-      const response = RESP; // mok API
-      // return thunkAPI.fulfillWithValue(response.data);
-      return thunkAPI.fulfillWithValue(response); //mok API
+      const response = await axios.get("http://3.34.185.48:8080/api/articles/"); //실제서버
+      // const response = RESP; // mokAPI
+      return thunkAPI.fulfillWithValue(response.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }
@@ -41,11 +43,12 @@ export const __getDetail = createAsyncThunk(
   "getDetail",
   async (payload, thunkAPI) => {
     try {
-      // const response = await axios.get("");
-      const response = await RESP[payload - 1]; // mok API
-      console.log("response", response, payload);
-      // return thunkAPI.fulfillWithValue(response.data);
-      return thunkAPI.fulfillWithValue(response); //mok API
+      const response = await axios.get(
+        `http://3.34.185.48:8080/api/articles/${payload}`
+      ); // 실제서버
+      // const response = await RESP.data.responseArticles[payload - 1]; // mok API
+
+      return thunkAPI.fulfillWithValue(response.data); //mok API
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }
@@ -56,11 +59,21 @@ export const __updateDevTools = createAsyncThunk(
   "updateDevTools",
   async (payload, thunkAPI) => {
     try {
-      console.log("update payload", payload);
-      await axios.patch(`url/${payload.id}`, {
-        content: payload.content,
-      });
-      return thunkAPI.fulfillWithValue(payload);
+      console.log("__updateDevTools", payload);
+      const response = await axios.patch(
+        `http://3.34.185.48:8080/api/articles/${[payload.id]}`,
+        payload
+      );
+
+      // const response = RESP.data.responseArticles[payload.id - 1];
+      // console.log(
+      //   "__updateDevTools response",
+      //   RESP.data.responseArticles[payload.id - 1],
+      //   "payload",
+      //   payload
+      // );
+
+      return thunkAPI.fulfillWithValue(response.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }
@@ -72,7 +85,7 @@ export const __deleteDevTools = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       console.log("__deleteDevTools", payload);
-      await axios.delete(`url/${payload}`);
+      await axios.delete(`http://3.34.185.48:8080/api/articles/${payload}`);
       return thunkAPI.fulfillWithValue(payload);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -114,7 +127,7 @@ export const devToolsSlice = createSlice({
     },
     [__getDetail.fulfilled]: (state, action) => {
       state.isLoading = false;
-      console.log("action.payload", action.payload);
+
       state.devtool = action.payload;
     },
     [__getDetail.rejected]: (state, { payload }) => {
@@ -126,7 +139,10 @@ export const devToolsSlice = createSlice({
     },
     [__updateDevTools.fulfilled]: (state, { payload }) => {
       state.isLoading = false;
-      console.log("UPDATE DEVTOOLS", payload);
+      console.log("UPDATE DEVTOOLS payload", payload);
+      // console.log(state.devtool);
+      // console.log(state.devtools);
+      state.devtool = payload;
     },
     [__updateDevTools.rejected]: (state, { payload }) => {
       state.isLoading = false;
@@ -138,6 +154,7 @@ export const devToolsSlice = createSlice({
     [__deleteDevTools.fulfilled]: (state, { payload }) => {
       state.isLoading = false;
       console.log("DELETE DEVTOOLS", payload);
+      state.devtools = state.devtools.filter((item) => item.id !== payload);
     },
     [__deleteDevTools.rejected]: () => {},
   },
