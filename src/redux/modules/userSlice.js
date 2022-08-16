@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { getCookie, removeCookie, setCookie } from 'shared/cookies';
 import axios from 'axios';
+import { BASE_URL } from 'shared/api';
 
 const initialState = {
   username: '',
@@ -13,11 +14,8 @@ export const __postUser = createAsyncThunk(
   'postUser',
   async (payload, thunkAPI) => {
     try {
-      const response = await axios.post(
-        'http://3.34.185.48/api/login',
-        payload
-      );
-      setCookie('mycookie', `${response.data.mytoken}`);
+      const response = await axios.post(`${BASE_URL}/api/login`, payload);
+      setCookie('mycookie', `BEARER ${response.data.mytoken}`);
       setCookie('myname', `${response.data.username}`);
       console.log(response);
       return thunkAPI.fulfillWithValue(response.data);
