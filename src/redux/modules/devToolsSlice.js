@@ -4,6 +4,7 @@ import RESP from "mockAPI/reponse";
 
 const initialState = {
   devtools: [],
+  devtool: {},
   isLoading: false,
   error: null,
 };
@@ -36,11 +37,27 @@ export const __getDevTools = createAsyncThunk(
   }
 );
 
+export const __getDetail = createAsyncThunk(
+  "getDetail",
+  async (payload, thunkAPI) => {
+    try {
+      // const response = await axios.get("");
+      const response = await RESP[payload - 1]; // mok API
+      console.log("response", response, payload);
+      // return thunkAPI.fulfillWithValue(response.data);
+      return thunkAPI.fulfillWithValue(response); //mok API
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
 export const __updateDevTools = createAsyncThunk(
   "updateDevTools",
   async (payload, thunkAPI) => {
     try {
-      await axios.patch(``, {
+      console.log("update payload", payload);
+      await axios.patch(`url/${payload.id}`, {
         content: payload.content,
       });
       return thunkAPI.fulfillWithValue(payload);
@@ -54,7 +71,8 @@ export const __deleteDevTools = createAsyncThunk(
   "deleteDevTools",
   async (payload, thunkAPI) => {
     try {
-      await axios.delete(``);
+      console.log("__deleteDevTools", payload);
+      await axios.delete(`url/${payload}`);
       return thunkAPI.fulfillWithValue(payload);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -83,10 +101,23 @@ export const devToolsSlice = createSlice({
     },
     [__getDevTools.fulfilled]: (state, action) => {
       state.isLoading = false;
-      console.log("GET DEVTOOLS", action.payload);
+      console.log("action.payload", action.payload);
       state.devtools = action.payload;
     },
     [__getDevTools.rejected]: (state, { payload }) => {
+      state.isLoading = false;
+      state.error = payload;
+    },
+    // __getDetail
+    [__getDetail.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [__getDetail.fulfilled]: (state, action) => {
+      state.isLoading = false;
+      console.log("action.payload", action.payload);
+      state.devtool = action.payload;
+    },
+    [__getDetail.rejected]: (state, { payload }) => {
       state.isLoading = false;
       state.error = payload;
     },

@@ -3,8 +3,16 @@ import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Form from "react-bootstrap/Form";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { colors } from "styles/theme";
+import { useState } from "react";
 
-const TextArea = ({ width, margin, height, border, onChangeHandler }) => {
+const TextArea = ({
+  width,
+  margin,
+  height,
+  border,
+  onChangeHandler,
+  defaultValue, //추가
+}) => {
   return (
     <>
       <StTextArea
@@ -19,6 +27,7 @@ const TextArea = ({ width, margin, height, border, onChangeHandler }) => {
           style={{ height: height }}
           borer={border}
           onChange={onChangeHandler}
+          defaultValue={defaultValue} //추가
         />
       </StTextArea>
     </>

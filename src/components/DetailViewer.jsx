@@ -1,41 +1,37 @@
-import styled from 'styled-components';
-import Btn from 'components/elements/Btn';
-import { colors } from 'styles/theme';
-import { useNavigate } from 'react-router-dom';
+import styled from "styled-components";
+import Btn from "components/elements/Btn";
+import { colors } from "styles/theme";
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { __deleteDevTools, __getDevTools } from "redux/modules/devToolsSlice";
 
-const DetailViewer = ({ handleEdit }) => {
+const DetailViewer = ({ handleEdit, devtool }) => {
   const navigate = useNavigate();
-  /* DATA SAMPLE -------------------------------------------------------------- */
-  const devTools = {
-    title: '나만 아는 개발 꿀팁',
-    content: '에러를 많이 낸다!',
-    username: '테스트이름',
-    category: '소프트웨어', // 하드웨어 / 소프트웨어
-    createAt: '2022년 8월 12일 3시 35분',
-    isMyArticles: true, // true / false
-  };
+  const dispatch = useDispatch();
 
-  const { title, content, username, category, createAt, isMyArticles } =
-    devTools;
+  const onClickDeleteHandler = (id) => {
+    dispatch(__deleteDevTools(id));
+  };
 
   return (
     <DevToolsContainer>
       <DevToolsHeaderContainer>
         <TitleContainer>
           <div>
-            <span>{category}</span>
+            <span>{devtool.category}</span>
           </div>
-          <h2>{title}</h2>
+          <h2>{devtool.title}</h2>
         </TitleContainer>
         <InfoContainer>
           <div>
-            <span>{username}</span>
+            <span> {devtool.username}</span>
           </div>
-          <StCreateAt>{createAt}</StCreateAt>
+          <StCreateAt> {devtool.createAt}</StCreateAt>
         </InfoContainer>
         <ButtonContainer>
-          {isMyArticles && (
-            <AuthBtn>
+          {devtool.isMyArticles && (
+            <AuthBtn key={devtool.id}>
               <Btn
                 size="medium"
                 variant="red_outline"
@@ -43,22 +39,27 @@ const DetailViewer = ({ handleEdit }) => {
               >
                 수정하기
               </Btn>
-              <Btn size="medium" variant="red_outline">
+              <Btn
+                size="medium"
+                variant="red_outline"
+                onClickHandler={() => onClickDeleteHandler(devtool.id)}
+              >
                 삭제하기
               </Btn>
             </AuthBtn>
           )}
+
           <Btn
             size="medium"
             variant="blue_outline"
-            onClickHandler={() => navigate('/')}
+            onClickHandler={() => navigate("/")}
           >
             목록으로
           </Btn>
         </ButtonContainer>
       </DevToolsHeaderContainer>
       <DevToolsContentContainer>
-        <p>{content}</p>
+        <p>{devtool.content}</p>
       </DevToolsContentContainer>
     </DevToolsContainer>
   );

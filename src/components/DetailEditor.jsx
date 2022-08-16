@@ -1,37 +1,54 @@
-import styled from 'styled-components';
-import Btn from 'components/elements/Btn';
-import { colors } from 'styles/theme';
-import TextArea from 'components/elements/TextArea';
+import styled from "styled-components";
+import Btn from "components/elements/Btn";
+import { colors } from "styles/theme";
+import TextArea from "components/elements/TextArea";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams, useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { __updateDevTools } from "redux/modules/devToolsSlice";
 
-const DetailEditor = ({ handleEdit }) => {
-  /* DATA SAMPLE -------------------------------------------------------------- */
-  const devTools = {
-    title: '나만 아는 개발 꿀팁',
-    content: '에러를 많이 낸다!',
-    username: '테스트이름',
-    category: '소프트웨어', // 하드웨어 / 소프트웨어
-    createAt: '2022년 8월 12일 3시 35분',
-    isMyArticles: true, // true / false
+const DetailEditor = ({ handleEdit, devtool }) => {
+  const [edit, setEdit] = useState();
+  let { id } = useParams();
+  const dispatch = useDispatch();
+
+  const onChangeContentHandler = (e) => {
+    console.log(e.target.value);
+    const { value } = e.target;
+    setEdit({ id: id, content: value });
   };
 
-  const { title, content, username, category, createAt, isMyArticles } =
-    devTools;
+  const onClickEditComplete = () => {
+    dispatch(__updateDevTools(edit));
+    handleEdit();
+  };
 
   return (
     <DevToolsContainer>
       <DevToolsHeaderContainer>
         <TitleContainer>
           <div>
-            <span>{category}</span>
+            <span>{devtool.category}</span>
           </div>
-          <h2>{title}</h2>
+          <h2>{devtool.title}</h2>
         </TitleContainer>
       </DevToolsHeaderContainer>
+
       <DevToolsContentContainer>
-        <TextArea height="400px" />
+        <TextArea
+          key={devtool.id}
+          height="400px"
+          defaultValue={devtool.content}
+          onChangeHandler={onChangeContentHandler}
+        />
       </DevToolsContentContainer>
+
       <BtnContainer>
-        <Btn size="large" variant="blue_filled">
+        <Btn
+          size="large"
+          variant="blue_filled"
+          onClickHandler={onClickEditComplete}
+        >
           작성 완료
         </Btn>
         <Btn size="large" variant="black_outline" onClickHandler={handleEdit}>
@@ -57,7 +74,7 @@ const DevToolsHeaderContainer = styled.div`
 
 const TitleContainer = styled.div`
   display: flex;
-  align-items: center;
+  align-devtools: center;
   margin-bottom: 10px;
 
   div {
