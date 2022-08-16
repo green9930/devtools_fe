@@ -61,7 +61,7 @@ export const __updateDevTools = createAsyncThunk(
     try {
       console.log("__updateDevTools", payload);
       const response = await axios.patch(
-        `http://3.34.185.48:8080/api/articles/${[payload.id]}`,
+        `http://3.34.185.48:8080/api/articles/${payload.id}`,
         payload
       );
 

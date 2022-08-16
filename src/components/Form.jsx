@@ -46,17 +46,17 @@ const Form = () => {
     // console.log("작성완료버튼 동작");
     // 분류, 제목, 내용 하나라도 입력하지 않았을 때 dispatch 하지 않음
     e.preventDefault();
-    if (option == "") {
+    if (option === "") {
       return setOptionAlert(alertMessage.optionAlert);
     } else {
       setOptionAlert("");
     }
-    if (title == "") {
+    if (title === "") {
       return setTitleAlert(alertMessage.titleAlert);
     } else {
       setTitleAlert("");
     }
-    if (content == "") {
+    if (content === "") {
       return setContentAlert(alertMessage.contentAlert);
     } else {
       setContentAlert("");
@@ -82,7 +82,7 @@ const Form = () => {
             }}
           >
             <StDropdown variant="success" id="dropdown-basic">
-              {option == "" ? "분류" : option}
+              {option === "" ? "분류" : option}
             </StDropdown>
             <Dropdown.Menu>
               <StDorpdownItem href="#/action-1" eventKey="하드웨어">
