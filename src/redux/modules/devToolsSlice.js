@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-import RESP from "mockAPI/reponse";
+import { BASE_URL } from "shared/api";
+import { getCookie } from "shared/cookies";
 
 const initialState = {
   devtools: [],
@@ -9,16 +10,20 @@ const initialState = {
   error: null,
 };
 
+console.log(`${BASE_URL}/api/articles`);
 export const __postDevTools = createAsyncThunk(
   "postDevTools",
   async (payload, thunkAPI) => {
     try {
-      console.log("payload", payload);
-      const response = await axios.post(
-        "http://3.34.185.48:8080/api/articles/",
-        payload
-      );
-      // const response = await axios.post(RESP, payload); //mock API 불가
+      const response = await axios({
+        method: "post",
+        url: `${BASE_URL}/api/articles`,
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `${getCookie("mycookie")}`,
+        },
+        data: payload,
+      });
       return thunkAPI.fulfillWithValue(response.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -30,8 +35,7 @@ export const __getDevTools = createAsyncThunk(
   "getDevTools",
   async (payload, thunkAPI) => {
     try {
-      const response = await axios.get("http://3.34.185.48:8080/api/articles/"); //실제서버
-      // const response = RESP; // mokAPI
+      const response = await axios.get(`${BASE_URL}/api/articles`);
       return thunkAPI.fulfillWithValue(response.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -43,12 +47,8 @@ export const __getDetail = createAsyncThunk(
   "getDetail",
   async (payload, thunkAPI) => {
     try {
-      const response = await axios.get(
-        `http://3.34.185.48:8080/api/articles/${payload}`
-      ); // 실제서버
-      // const response = await RESP.data.responseArticles[payload - 1]; // mok API
-
-      return thunkAPI.fulfillWithValue(response.data); //mok API
+      const response = await axios.get(`${BASE_URL}/api/articles/${payload}`);
+      return thunkAPI.fulfillWithValue(response.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }
@@ -61,7 +61,7 @@ export const __updateDevTools = createAsyncThunk(
     try {
       console.log("__updateDevTools", payload);
       const response = await axios.patch(
-        `http://3.34.185.48:8080/api/articles/${payload.id}`,
+        `${BASE_URL}/api/articles/${[payload.id]}`,
         payload
       );
 
@@ -85,7 +85,7 @@ export const __deleteDevTools = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       console.log("__deleteDevTools", payload);
-      await axios.delete(`http://3.34.185.48:8080/api/articles/${payload}`);
+      await axios.delete(`${BASE_URL}/api/articles/${payload}`);
       return thunkAPI.fulfillWithValue(payload);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
