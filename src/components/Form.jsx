@@ -38,7 +38,7 @@ const Form = () => {
 
   // useEffect(() => {}, []);
 
-  // console.log("option", option);
+  console.log("option", option);
   console.log("title", title);
   console.log("content", content);
 
@@ -69,6 +69,7 @@ const Form = () => {
         content: content,
       })
     );
+    navigate("/");
   };
 
   return (
@@ -81,17 +82,13 @@ const Form = () => {
             }}
           >
             <StDropdown variant="success" id="dropdown-basic">
-              {option == ""
-                ? "분류"
-                : option == "HW"
-                ? "하드웨어"
-                : "소프트웨어"}
+              {option == "" ? "분류" : option}
             </StDropdown>
             <Dropdown.Menu>
-              <StDorpdownItem href="#/action-1" eventKey="HW">
+              <StDorpdownItem href="#/action-1" eventKey="하드웨어">
                 하드웨어
               </StDorpdownItem>
-              <StDorpdownItem href="#/action-2" eventKey="SW">
+              <StDorpdownItem href="#/action-2" eventKey="소프트웨어">
                 소프트웨어
               </StDorpdownItem>
             </Dropdown.Menu>

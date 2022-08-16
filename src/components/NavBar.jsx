@@ -11,6 +11,13 @@ const NavBar = () => {
   // isAuth === false : 비회원
   const navigate = useNavigate();
 
+  const handleLogout = () => {
+    document.cookie = `mycookie=; expires=${new Date(
+      '2022-01-01'
+    ).toUTCString()}`;
+    navigate('/login');
+  };
+
   const name = 'username';
   return (
     <NavBarContainer>
@@ -29,11 +36,7 @@ const NavBar = () => {
       {isAuth ? (
         <InfoContainer>
           <span>{name}님, 안녕하세요</span>
-          <Btn
-            size="small"
-            variant="text"
-            onClickHandler={() => navigate('/login')}
-          >
+          <Btn size="small" variant="text" onClickHandler={handleLogout}>
             로그아웃
           </Btn>
         </InfoContainer>

@@ -9,15 +9,16 @@ import { __getDetail } from "redux/modules/devToolsSlice";
 const Detail = () => {
   const [isEdit, setIsEdit] = useState(false);
   const { id } = useParams();
-  const handleEdit = () => setIsEdit(!isEdit);
+  const handleEdit = () => {
+    setIsEdit(!isEdit);
+  };
   const dispatch = useDispatch();
   const { devtool } = useSelector((state) => state.devTools);
 
   useEffect(() => {
     dispatch(__getDetail(id));
   }, []);
-  // 하나의 객체만
-  console.log("devtool", devtool);
+  console.log(devtool);
   return (
     <>
       {isEdit ? (

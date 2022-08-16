@@ -15,7 +15,7 @@ const CommentList = () => {
   useEffect(() => {
     dispatch(__getDetail(id));
   }, []);
-  console.log(devtool);
+  // console.log(devtool);
   const comments = [
     {
       commentId: 1,
@@ -44,7 +44,6 @@ const CommentList = () => {
   return (
     <CommentContainer>
       {devtool?.comments?.map((val) => {
-        console.log(devtool);
         const { commentId, username, createAt, comment, articlesId } = val;
         return (
           <ItemContainer key={commentId}>

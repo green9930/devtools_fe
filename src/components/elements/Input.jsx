@@ -74,7 +74,7 @@ const InputContainer = styled.div`
     }};
 
     ::placeholder {
-      /* font-size: 14px; */
+      font-size: 14px;
     }
   }
 `;
