@@ -8,7 +8,7 @@ import { useParams } from "react-router-dom";
 const Comment = ({ devtool }) => {
   return (
     <div>
-      <CommentForm />
+      <CommentForm devtool={devtool} />
       <CommentList devtool={devtool} />
     </div>
   );

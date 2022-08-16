@@ -38,9 +38,9 @@ const Form = () => {
 
   // useEffect(() => {}, []);
 
-  // console.log("option", option);
-  // console.log("title", title);
-  // console.log("content", content);
+  console.log("option", option);
+  console.log("title", title);
+  console.log("content", content);
 
   const onClickCreateHandler = (e) => {
     // console.log("작성완료버튼 동작");
@@ -69,6 +69,7 @@ const Form = () => {
         content: content,
       })
     );
+    navigate("/");
   };
 
   return (
@@ -81,17 +82,13 @@ const Form = () => {
             }}
           >
             <StDropdown variant="success" id="dropdown-basic">
-              {option == ""
-                ? "분류"
-                : option == "HW"
-                ? "하드웨어"
-                : "소프트웨어"}
+              {option == "" ? "분류" : option}
             </StDropdown>
             <Dropdown.Menu>
-              <StDorpdownItem href="#/action-1" eventKey="HW">
+              <StDorpdownItem href="#/action-1" eventKey="하드웨어">
                 하드웨어
               </StDorpdownItem>
-              <StDorpdownItem href="#/action-2" eventKey="SW">
+              <StDorpdownItem href="#/action-2" eventKey="소프트웨어">
                 소프트웨어
               </StDorpdownItem>
             </Dropdown.Menu>
@@ -105,6 +102,8 @@ const Form = () => {
             value={title}
             placeHolderText="제목을 입력해주세요"
             onChangeHandler={onChangeTitleHanlder}
+            maxLength="30" // 글자수 제한
+            minLength="1"
           ></Input>
         </div>
       </StTopDiv>
@@ -114,6 +113,7 @@ const Form = () => {
         margin="40px auto"
         border={`${colors.gray2} 1px solid`}
         onChangeHandler={onChangeContentHanlder}
+        maxLength="400" // 글자수 제한
       />
       <StBottomButtonBox>
         <Btn

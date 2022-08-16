@@ -1,17 +1,23 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import axios from 'axios';
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import axios from "axios";
 
 const initialState = {
   comments: [],
+  comment: {},
   isLoading: false,
   error: null,
 };
 
 export const __postComments = createAsyncThunk(
-  'postComments',
+  "postComments",
   async (payload, thunkAPI) => {
     try {
-      const response = await axios.post('', payload);
+      console.log(payload);
+      const response = await axios.post(
+        `http://3.34.185.48:8080/api/articles/${payload.id}/comments`,
+        { comment: payload.comments }
+      );
+      console.log(response);
       return thunkAPI.fulfillWithValue(response.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -20,10 +26,10 @@ export const __postComments = createAsyncThunk(
 );
 
 export const __getComments = createAsyncThunk(
-  'getComments',
+  "getComments",
   async (payload, thunkAPI) => {
     try {
-      const response = await axios.get('');
+      const response = await axios.get("");
       return thunkAPI.fulfillWithValue(response.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -32,7 +38,7 @@ export const __getComments = createAsyncThunk(
 );
 
 export const commentsSlice = createSlice({
-  name: 'commentsSlice',
+  name: "commentsSlice",
   initialState,
   reducers: {},
   extraReducers: {
@@ -41,7 +47,7 @@ export const commentsSlice = createSlice({
     },
     [__postComments.fulfilled]: (state, action) => {
       state.isLoading = false;
-      console.log('POST COMMENTS', action);
+      console.log("POST COMMENTS", action.payload);
     },
     [__postComments.rejected]: (state, action) => {
       state.isLoading = false;
@@ -52,7 +58,7 @@ export const commentsSlice = createSlice({
     },
     [__getComments.fulfilled]: (state, action) => {
       state.isLoading = false;
-      console.log('GET COMMENTS', action);
+      console.log("GET COMMENTS", action.payload);
     },
     [__getComments.rejected]: (state, { payload }) => {
       state.isLoading = false;

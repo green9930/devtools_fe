@@ -12,6 +12,7 @@ const DetailViewer = ({ handleEdit, devtool }) => {
 
   const onClickDeleteHandler = (id) => {
     dispatch(__deleteDevTools(id));
+    navigate("/");
   };
 
   return (
@@ -97,7 +98,6 @@ const TitleContainer = styled.div`
   }
   h2 {
     color: ${colors.black};
-    margin-left: ;
   }
 `;
 
