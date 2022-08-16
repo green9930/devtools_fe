@@ -1,7 +1,11 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 const Loading = () => {
-  return;
+  return (
+    <div>
+      <span>LOADING...</span>
+    </div>
+  );
 };
 
 export default Loading;

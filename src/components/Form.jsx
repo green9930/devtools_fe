@@ -1,31 +1,31 @@
-import styled from "styled-components";
-import Dropdown from "react-bootstrap/Dropdown";
-import DropdownButton from "react-bootstrap/DropdownButton";
-import TextArea from "./elements/TextArea";
-import { colors } from "styles/theme";
-import Input from "./elements/Input";
-import { useState, useEffect } from "react";
-import Btn from "./elements/Btn";
-import { useDispatch } from "react-redux";
-import { __postDevTools } from "redux/modules/devToolsSlice";
-import { useNavigate } from "react-router-dom";
+import styled from 'styled-components';
+import Dropdown from 'react-bootstrap/Dropdown';
+import DropdownButton from 'react-bootstrap/DropdownButton';
+import TextArea from './elements/TextArea';
+import { colors } from 'styles/theme';
+import Input from './elements/Input';
+import { useState, useEffect } from 'react';
+import Btn from './elements/Btn';
+import { useDispatch } from 'react-redux';
+import { __postDevTools } from 'redux/modules/devToolsSlice';
+import { useNavigate } from 'react-router-dom';
 
 const Form = () => {
-  const [option, setOption] = useState("");
-  const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
+  const [option, setOption] = useState('');
+  const [title, setTitle] = useState('');
+  const [content, setContent] = useState('');
   // const [post, setPost] = useState({});
-  const [optionAlert, setOptionAlert] = useState("");
-  const [titleAlert, setTitleAlert] = useState("");
-  const [contentAlert, setContentAlert] = useState("");
+  const [optionAlert, setOptionAlert] = useState('');
+  const [titleAlert, setTitleAlert] = useState('');
+  const [contentAlert, setContentAlert] = useState('');
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const alertMessage = {
-    optionAlert: "분류를 선택하세요",
-    titleAlert: "제목을 입력하세요",
-    contentAlert: "내용을 입력하세요",
+    optionAlert: '분류를 선택하세요',
+    titleAlert: '제목을 입력하세요',
+    contentAlert: '내용을 입력하세요',
   };
 
   const onChangeTitleHanlder = (e) => {
@@ -38,28 +38,28 @@ const Form = () => {
 
   // useEffect(() => {}, []);
 
-  console.log("option", option);
-  console.log("title", title);
-  console.log("content", content);
+  console.log('option', option);
+  console.log('title', title);
+  console.log('content', content);
 
   const onClickCreateHandler = (e) => {
     // console.log("작성완료버튼 동작");
     // 분류, 제목, 내용 하나라도 입력하지 않았을 때 dispatch 하지 않음
     e.preventDefault();
-    if (option == "") {
+    if (option === '') {
       return setOptionAlert(alertMessage.optionAlert);
     } else {
-      setOptionAlert("");
+      setOptionAlert('');
     }
-    if (title == "") {
+    if (title === '') {
       return setTitleAlert(alertMessage.titleAlert);
     } else {
-      setTitleAlert("");
+      setTitleAlert('');
     }
-    if (content == "") {
+    if (content === '') {
       return setContentAlert(alertMessage.contentAlert);
     } else {
-      setContentAlert("");
+      setContentAlert('');
     }
 
     dispatch(
@@ -69,7 +69,7 @@ const Form = () => {
         content: content,
       })
     );
-    navigate("/");
+    navigate('/');
   };
 
   return (
@@ -82,7 +82,7 @@ const Form = () => {
             }}
           >
             <StDropdown variant="success" id="dropdown-basic">
-              {option == "" ? "분류" : option}
+              {option === '' ? '분류' : option}
             </StDropdown>
             <Dropdown.Menu>
               <StDorpdownItem href="#/action-1" eventKey="하드웨어">
@@ -127,7 +127,7 @@ const Form = () => {
           variant="black_outline"
           color={colors.black}
           size="large"
-          onClickHandler={() => navigate("/")}
+          onClickHandler={() => navigate('/')}
         >
           나가기
         </Btn>
@@ -172,7 +172,7 @@ const StDropdown = styled(Dropdown.Toggle)`
 const StDorpdownItem = styled(Dropdown.Item)`
   &:hover {
     background-color: ${colors.green1};
-    font-family: "Inter";
+    font-family: 'Inter';
     font-style: normal;
     font-weight: 600;
     font-size: 14px;
@@ -186,7 +186,7 @@ const StDorpdownItem = styled(Dropdown.Item)`
 
   width: 190px;
   height: 32px;
-  font-family: "Inter";
+  font-family: 'Inter';
   font-style: normal;
   font-weight: 600;
   font-size: 14px;

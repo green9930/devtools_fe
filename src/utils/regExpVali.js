@@ -7,7 +7,6 @@ const regExpVali = (target, name) => {
   if (name === 'username') verify = idRegExp.test(target);
   if (name === 'password') verify = pwRegExp.test(target);
 
-  console.log(verify);
   return verify;
 };
 export default regExpVali;
