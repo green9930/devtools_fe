@@ -39,8 +39,8 @@ const Form = () => {
   // useEffect(() => {}, []);
 
   // console.log("option", option);
-  // console.log("title", title);
-  // console.log("content", content);
+  console.log("title", title);
+  console.log("content", content);
 
   const onClickCreateHandler = (e) => {
     // console.log("작성완료버튼 동작");
@@ -105,6 +105,8 @@ const Form = () => {
             value={title}
             placeHolderText="제목을 입력해주세요"
             onChangeHandler={onChangeTitleHanlder}
+            maxLength="30" // 글자수 제한
+            minLength="1"
           ></Input>
         </div>
       </StTopDiv>
@@ -114,6 +116,7 @@ const Form = () => {
         margin="40px auto"
         border={`${colors.gray2} 1px solid`}
         onChangeHandler={onChangeContentHanlder}
+        maxLength="400" // 글자수 제한
       />
       <StBottomButtonBox>
         <Btn

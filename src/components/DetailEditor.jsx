@@ -8,16 +8,16 @@ import { useState, useEffect } from "react";
 import { __updateDevTools } from "redux/modules/devToolsSlice";
 
 const DetailEditor = ({ handleEdit, devtool }) => {
-  const [edit, setEdit] = useState();
+  const [edit, setEdit] = useState({ ...devtool });
   let { id } = useParams();
   const dispatch = useDispatch();
 
   const onChangeContentHandler = (e) => {
-    console.log(e.target.value);
     const { value } = e.target;
     setEdit({ id: id, content: value });
   };
 
+  console.log("edit", edit);
   const onClickEditComplete = () => {
     dispatch(__updateDevTools(edit));
     handleEdit();

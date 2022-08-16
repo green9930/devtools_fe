@@ -12,8 +12,7 @@ const RESP = [
         commentId: 1,
         username: "admin1",
         createAt: "2022년 8월 12일 3시 40분",
-        comment:
-          "댓글 최대 글자 수 확인 개발 어려워요 서버 연동 힘들어 유효성 검사해야",
+        comment: "댓글1",
         articlesId: 1,
       },
       {
@@ -45,8 +44,7 @@ const RESP = [
         commentId: 1,
         username: "admin1",
         createAt: "2022년 8월 12일 3시 40분",
-        comment:
-          "댓글 최대 글자 수 확인 개발 어려워요 서버 연동 힘들어 유효성 검사해야",
+        comment: "댓글2",
         articlesId: 2,
       },
       {

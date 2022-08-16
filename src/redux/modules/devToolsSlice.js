@@ -56,7 +56,7 @@ export const __updateDevTools = createAsyncThunk(
   "updateDevTools",
   async (payload, thunkAPI) => {
     try {
-      console.log("update payload", payload);
+      console.log("__updateDevTools payload", payload);
       await axios.patch(`url/${payload.id}`, {
         content: payload.content,
       });
