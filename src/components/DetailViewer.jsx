@@ -97,7 +97,6 @@ const TitleContainer = styled.div`
   }
   h2 {
     color: ${colors.black};
-    margin-left: ;
   }
 `;
 
