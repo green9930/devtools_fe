@@ -1,29 +1,25 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { getCookie, removeCookie, setCookie } from 'shared/cookies';
 import axios from 'axios';
 
 const initialState = {
-  user: [],
+  username: '',
+  isLogin: false,
   isLoading: false,
-  error: null,
+  error: '',
 };
 
 export const __postUser = createAsyncThunk(
   'postUser',
   async (payload, thunkAPI) => {
     try {
-      const response = await axios.post('', payload);
-      return thunkAPI.fulfillWithValue(response.data);
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error);
-    }
-  }
-);
-
-export const __getUser = createAsyncThunk(
-  'getUser',
-  async (payload, thunkAPI) => {
-    try {
-      const response = await axios.get('');
+      const response = await axios.post(
+        'http://3.34.185.48/api/login',
+        payload
+      );
+      setCookie('mycookie', `${response.data.mytoken}`);
+      setCookie('myname', `${response.data.username}`);
+      console.log(response);
       return thunkAPI.fulfillWithValue(response.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -34,31 +30,34 @@ export const __getUser = createAsyncThunk(
 export const userSlice = createSlice({
   name: 'userSlice',
   initialState,
-  reducers: {},
+  reducers: {
+    getUser: (state, action) =>
+      (action.payload = {
+        username: getCookie('myname'),
+        isLogin: getCookie('mycookie') ? true : false,
+      }),
+    deleteUser: (state, action) => {
+      removeCookie('mycookie');
+      removeCookie('myname');
+      return (action.payload = { username: '', isLogin: false });
+    },
+  },
   extraReducers: {
-    [__postUser.pending]: (state, action) => {
+    [__postUser.pending]: (state) => {
       state.isLoading = true;
     },
-    [__postUser.fulfilled]: (state, action) => {
+    [__postUser.fulfilled]: (state) => {
       state.isLoading = false;
-      console.log('POST USER', action);
+      state.username = getCookie('myname');
+      state.isLogin = getCookie('mycookie') ? true : false;
     },
-    [__postUser.rejected]: (state, action) => {
+    [__postUser.rejected]: (state, { payload }) => {
       state.isLoading = false;
-      state.error = action.payload;
-    },
-    [__getUser.pending]: (state) => {
-      state.isLoading = true;
-    },
-    [__getUser.fulfilled]: (state, action) => {
-      state.isLoading = false;
-      console.log('GET USER', action);
-    },
-    [__getUser.rejected]: (state, { payload }) => {
-      state.isLoading = false;
-      state.error = payload;
+      console.log('POST USER ERROR', payload.response.data.error);
+      state.error = payload.response.data.error;
     },
   },
 });
 
+export const userActions = userSlice.actions;
 export default userSlice;
