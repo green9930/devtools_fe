@@ -1,29 +1,33 @@
-import styled from "styled-components";
-import Btn from "components/elements/Btn";
-import { colors } from "styles/theme";
-import TextArea from "components/elements/TextArea";
-import { useDispatch, useSelector } from "react-redux";
-import { useParams, useNavigate, Navigate } from "react-router-dom";
-import { useState, useEffect } from "react";
-import { __getDetail, __updateDevTools } from "redux/modules/devToolsSlice";
+import styled from 'styled-components';
+import Btn from 'components/elements/Btn';
+import { colors } from 'styles/theme';
+import TextArea from 'components/elements/TextArea';
+import { useDispatch, useSelector } from 'react-redux';
+import { useParams, useNavigate, Navigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { __getDetail, __updateDevTools } from 'redux/modules/devToolsSlice';
 
 const DetailEditor = ({ handleEdit, devtool }) => {
   const [edit, setEdit] = useState({ ...devtool });
   let { id } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
   const onChangeContentHandler = (e) => {
     const { value } = e.target;
     setEdit({ id: +id, content: value });
   };
-  console.log("edit", edit);
+
+  console.log('edit', edit);
 
   const onClickEditComplete = () => {
     dispatch(__updateDevTools(edit));
     dispatch(__getDetail(id));
     handleEdit();
   };
+
   console.log(devtool);
+
   return (
     <DevToolsContainer>
       <DevToolsHeaderContainer>

@@ -5,8 +5,6 @@ import styled from 'styled-components';
 import Input from 'components/elements/Input';
 import Btn from 'components/elements/Btn';
 import { colors } from 'styles/theme';
-import { getCookie, setCookie } from 'shared/cookies';
-import axios from 'axios';
 import { __postUser } from 'redux/modules/userSlice';
 
 const Login = () => {
@@ -39,42 +37,6 @@ const Login = () => {
       dispatch(__postUser(user));
       console.log('SUBMIT STATE', username, isLogin, isLoading, error);
       isLogin && navigate('/');
-    }
-  };
-
-  /* TEST --------------------------------------------------------------------- */
-  const [testTitle, setTestTitle] = useState('');
-  const [testContent, setTestContent] = useState('');
-  // title / content
-  const [testVal, setTestVal] = useState({
-    title: '',
-    content: '',
-    category: '하드웨어',
-  });
-
-  const testChange = (e) => {
-    if (e.target.name === 'title') setTestTitle(e.target.value);
-    if (e.target.name === 'content') setTestContent(e.target.value);
-    setTestVal({ ...testVal, title: testTitle, content: testContent });
-  };
-
-  const testSubmit = async (e) => {
-    try {
-      e.preventDefault();
-      console.log('TESTVAL', testVal);
-      console.log(`Bearer ${getCookie('mycookie')}`);
-      const testRes = await axios({
-        method: 'post',
-        url: 'http://3.34.185.48/api/articles',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${getCookie('mycookie')}`,
-        },
-        data: testVal,
-      });
-      console.log('TEST RESPONSE', testRes);
-    } catch (err) {
-      console.log(err);
     }
   };
 
@@ -139,21 +101,6 @@ const Login = () => {
       <AlertMessageContainer>
         <span>{error ? error : userAlert}</span>
       </AlertMessageContainer>
-      {/* <form onSubmit={testSubmit}>
-        <input
-          type="text"
-          name="title"
-          value={testTitle}
-          onChange={testChange}
-        />
-        <input
-          type="text"
-          name="content"
-          value={testContent}
-          onChange={testChange}
-        />
-        <button type="submit">SUBMIT</button>
-      </form> */}
     </LoginContainer>
   );
 };

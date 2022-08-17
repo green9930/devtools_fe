@@ -1,13 +1,13 @@
-import styled from "styled-components";
-import DevTool from "./DevTool";
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { __getDevTools } from "redux/modules/devToolsSlice";
+import styled from 'styled-components';
+import DevTool from './DevTool';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { __getDevTools } from 'redux/modules/devToolsSlice';
 
 const DevToolsList = () => {
   const dispatch = useDispatch();
   const { devtools, isLoading, error } = useSelector((state) => state.devTools);
-  console.log(devtools);
+
   useEffect(() => {
     dispatch(__getDevTools());
   }, [dispatch]);
@@ -15,7 +15,7 @@ const DevToolsList = () => {
   return (
     <StDevToolsList>
       {devtools?.map((item) => (
-        <DevTool key={item.id} item={item} />
+        <DevTool key={item.articleId} item={item} />
       ))}
     </StDevToolsList>
   );

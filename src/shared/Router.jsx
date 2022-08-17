@@ -7,11 +7,14 @@ import RegisterPage from 'pages/RegisterPage';
 import { useEffect } from 'react';
 import { userActions } from 'redux/modules/userSlice';
 import { useDispatch, useSelector } from 'react-redux';
+import ErrorPage from 'pages/ErrorPage';
+import UnAuthPage from 'pages/UnAuthPage';
+import Loading from 'components/Loading';
 
 const Router = () => {
   const dispatch = useDispatch();
 
-  const { isLogin } = useSelector((state) => state.user);
+  const { isLoading, username, isLogin } = useSelector((state) => state.user);
 
   useEffect(() => {
     dispatch(userActions.getUser());
@@ -32,14 +35,16 @@ const Router = () => {
           path="/login"
           element={isLogin ? <Navigate to="/" /> : <LoginPage />}
         />
-        <Route
-          path="/form"
-          element={isLogin ? <FormPage /> : <Navigate to="/login" />}
-        />
+        <Route path="/form" element={isLogin ? <FormPage /> : <UnAuthPage />} />
         <Route
           path="/detail/:id"
-          element={isLogin ? <DetailPage /> : <Navigate to="/login" />}
+          element={isLogin ? <DetailPage /> : <UnAuthPage />}
         />
+        <Route
+          path="/unauth"
+          element={isLogin ? <Navigate to="/" /> : <UnAuthPage />}
+        />
+        <Route path="/*" element={<ErrorPage />} />
       </Routes>
     </BrowserRouter>
   );

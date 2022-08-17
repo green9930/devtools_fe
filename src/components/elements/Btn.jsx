@@ -90,12 +90,6 @@ const Button = styled.button`
 
   ${({ variant }) => {
     switch (variant) {
-      case 'disabled':
-        return css`
-          border: 1px solid ${colors.gray2};
-          background-color: ${colors.gray2};
-          color: ${colors.white};
-        `;
       case 'black_outline':
         return css`
           border: 1px solid ${colors.black};
@@ -110,7 +104,7 @@ const Button = styled.button`
         `;
       case 'blue_filled':
         return css`
-          border: none;
+          border: 1px solid ${colors.blue};
           background: ${colors.blue};
           color: ${colors.white};
         `;
@@ -122,8 +116,7 @@ const Button = styled.button`
         `;
       case 'red_filled':
         return css`
-          border: none;
-
+          border: 1px solid ${colors.red};
           background: ${colors.red};
           color: ${colors.white};
         `;
@@ -135,7 +128,7 @@ const Button = styled.button`
         `;
       case 'green_filled':
         return css`
-          border: none;
+          border: 1px solid ${colors.green1};
           background: ${colors.green1};
           color: ${colors.white};
         `;
@@ -152,6 +145,7 @@ const Button = styled.button`
 
   :disabled {
     cursor: not-allowed;
+    border: 1px solid ${colors.gray2};
     background-color: ${colors.gray2};
     color: ${colors.white};
   }
