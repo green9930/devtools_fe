@@ -151,7 +151,7 @@ const Register = () => {
               >
                 <Btn
                   size="small"
-                  variant={isUsernameActive ? 'green_outline' : 'disabled'}
+                  variant="green_outline"
                   isAble={isUsernameActive ? false : true}
                   onClickHandler={handleCheckDuplicate}
                 >

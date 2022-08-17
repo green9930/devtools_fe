@@ -25,7 +25,7 @@ const CommentForm = () => {
     dispatch(
       __postComments({
         articleId: id,
-        comments: text,
+        comment: text,
       })
     );
   };
@@ -64,9 +64,9 @@ const CommentForm = () => {
           </Btn>
         </form>
       </CommentFormContainer>
-      <AlertMessageContainer>
+      <MessageContainer>
         <span>{alertMessage}</span>
-      </AlertMessageContainer>
+      </MessageContainer>
     </>
   );
 };
@@ -93,7 +93,7 @@ const NameContainer = styled.div`
   }
 `;
 
-const AlertMessageContainer = styled.div`
+const MessageContainer = styled.div`
   height: 40px;
 
   span {
