@@ -11,8 +11,9 @@ const TextArea = ({
   height,
   border,
   onChangeHandler,
-  defaultValue, //추가
-  maxLength, //추가
+  defaultValue,
+  maxLength,
+  value,
 }) => {
   return (
     <>
@@ -28,8 +29,9 @@ const TextArea = ({
           style={{ height: height }}
           borer={border}
           onChange={onChangeHandler}
-          defaultValue={defaultValue} //추가
-          maxLength={maxLength} //추가
+          defaultValue={defaultValue}
+          maxLength={maxLength}
+          value={value}
         />
       </StTextArea>
     </>

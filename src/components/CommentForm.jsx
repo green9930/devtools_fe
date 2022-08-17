@@ -39,12 +39,12 @@ const CommentForm = ({ devtool }) => {
     setText(val);
   };
   // console.log("text", text, "id", id);
-  // console.log(devtool);
+  console.log(devtool);
   return (
     <>
       <CommentFormContainer>
         <NameContainer>
-          <span>{loginuser}</span>
+          <span>{devtool.username}</span>
         </NameContainer>
         <form onSubmit={handleSubmit}>
           <Input

@@ -16,6 +16,7 @@ const Input = ({
   value,
   maxLength,
   minLength,
+  oninput,
 }) => {
   return (
     <InputContainer size={size} isValid={isValid}>
