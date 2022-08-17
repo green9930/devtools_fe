@@ -6,17 +6,18 @@ import { colors } from 'styles/theme';
 import HW from 'assets/HW.jpg';
 import SW from 'assets/SW.jpg';
 
-const DevTool = (props) => {
+const DevTool = ({ item }) => {
   const navigate = useNavigate();
 
-  console.log(props);
+  const { category, title, username, createAt } = item;
+
   return (
     <div>
       <Card
         style={{ width: '347px', height: '398px', cursor: 'pointer' }}
-        onClick={() => navigate(`/detail/${props.item.articlesId}`)}
+        onClick={() => navigate(`/detail/${item.articleId}`)}
       >
-        {props.item.category === '하드웨어' ? (
+        {category === '하드웨어' ? (
           <Card.Img variant="top" src={HW} />
         ) : (
           <Card.Img variant="top" src={SW} />
@@ -25,22 +26,15 @@ const DevTool = (props) => {
           <CardTop>
             <CardTitle>
               <Category>
-                [
-                {props.item.category === '하드웨어' ? '하드웨어' : '소프트웨어'}
-                ]
+                [{category === '하드웨어' ? '하드웨어' : '소프트웨어'}]
               </Category>
               <Title>
-                {" "}
-                {props.item.title.length < 11
-                  ? props.item.title
-                  : props.item.title.slice(0, 11) + "..."}
+                {title.length < 11 ? title : title.slice(0, 11) + '...'}
               </Title>
             </CardTitle>
-
-            <UserName>{props.item.username}</UserName>
+            <UserName>{username}</UserName>
           </CardTop>
-
-          <Date>{props.item.createAt}</Date>
+          <Date>{createAt}</Date>
         </CardInfoContainer>
       </Card>
     </div>
@@ -64,10 +58,6 @@ const Category = styled.span`
   height: 24px;
   left: 173px;
   top: 480px;
-  font-family: 'SpoqaHanSans';
-  font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
   line-height: 24px;
   color: ${colors.gray2};
 `;
@@ -77,8 +67,6 @@ const Title = styled.span`
   height: 36px;
   left: 663px;
   top: 475px;
-  font-family: 'SpoqaHanSans';
-  font-style: normal;
   font-weight: 700;
   font-size: 24px;
   line-height: 36px;
@@ -87,11 +75,8 @@ const Title = styled.span`
 const UserName = styled.span`
   width: 310px;
   height: 24px;
-  left: 967px;
   top: 526px;
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 400;
+  left: 967px;
   font-size: 16px;
   line-height: 24px;
   color: ${colors.green1};
@@ -102,9 +87,6 @@ const Date = styled.div`
   height: 15px;
   left: 967px;
   top: 622px;
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 400;
   font-size: 12px;
   line-height: 15px;
   color: ${colors.blue};
