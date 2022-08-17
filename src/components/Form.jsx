@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import Dropdown from 'react-bootstrap/Dropdown';
-import DropdownButton from 'react-bootstrap/DropdownButton';
 import TextArea from './elements/TextArea';
 import { colors } from 'styles/theme';
 import Input from './elements/Input';
@@ -30,18 +29,12 @@ const Form = () => {
   const onChangeTitleHanlder = (e) => {
     setTitle(e.target.value.slice(0, 30));
   };
-  console.log('title.length', title.length);
 
   const onChangeContentHanlder = (e) => {
     setContent(e.target.value.slice(0, 400));
   };
 
-  // console.log('option', option);
-  // console.log('title', title);
-  // console.log('content', content);
-
   const onClickCreateHandler = (e) => {
-    // 분류, 제목, 내용 하나라도 입력하지 않았을 때 dispatch 하지 않음
     e.preventDefault();
     if (option === '') {
       return setOptionAlert(alertMessage.optionAlert);
@@ -68,7 +61,7 @@ const Form = () => {
     );
     navigate('/');
   };
-  const inputLengthHandler = () => {};
+
   return (
     <div>
       <StTopDiv>
@@ -150,11 +143,13 @@ const StTopDiv = styled.div`
 
 const StDropdown = styled(Dropdown.Toggle)`
   background-color: ${colors.white};
-  border: 1px solid #dee2e6;
-  color: #abb5be;
+  border: 1px solid ${colors.gray1};
+  color: ${colors.gray1};
+
   &:hover {
     background-color: ${colors.green1};
   }
+
   width: 190px;
   height: 48px;
   border-radius: 4px;
@@ -162,10 +157,20 @@ const StDropdown = styled(Dropdown.Toggle)`
   display: flex;
   align-items: center;
   font-weight: 600px;
-  font-size: 16px;
 `;
 
 const StDorpdownItem = styled(Dropdown.Item)`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 8px 16px;
+  width: 190px;
+  height: 32px;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 16px;
+  color: ${colors.black};
+
   &:hover {
     background-color: ${colors.green1};
     font-family: 'Inter';
@@ -175,19 +180,6 @@ const StDorpdownItem = styled(Dropdown.Item)`
     line-height: 16px;
     color: ${colors.white};
   }
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  padding: 8px 16px;
-
-  width: 190px;
-  height: 32px;
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 600;
-  font-size: 14px;
-  line-height: 16px;
-  color: ${colors.black};
 `;
 
 const StBottomButtonBox = styled.div`
