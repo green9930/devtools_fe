@@ -120,12 +120,14 @@ export const __postComments = createAsyncThunk(
     try {
       const response = await axios({
         method: 'post',
-        url: `${BASE_URL}/api/articles/${payload.articleId}/comments`,
+        url: `${BASE_URL}/api/articles/${
+          ('PAYLOAD', payload.articleId)
+        }/comments`,
         headers: {
           'Content-Type': 'application/json',
           Authorization: `${getCookie('mycookie')}`,
         },
-        data: { comment: payload.comments },
+        data: { comment: payload.comment },
       });
 
       console.log(response);

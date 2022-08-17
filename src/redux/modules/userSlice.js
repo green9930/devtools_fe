@@ -17,7 +17,6 @@ export const __postUser = createAsyncThunk(
       const response = await axios.post(`${BASE_URL}/api/login`, payload);
       setCookie('mycookie', `BEARER ${response.data.mytoken}`);
       setCookie('myname', `${response.data.username}`);
-      console.log(response);
       return thunkAPI.fulfillWithValue(response.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
