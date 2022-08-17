@@ -1,14 +1,10 @@
-import CommentForm from "components/CommentForm";
-import CommentList from "components/CommentList";
-import { useState, useEffect } from "react";
-import { __getDetail } from "redux/modules/devToolsSlice";
-import { useSelector, useDispatch } from "react-redux";
-import { useParams } from "react-router-dom";
+import CommentForm from 'components/CommentForm';
+import CommentList from 'components/CommentList';
 
 const Comment = ({ devtool }) => {
   return (
     <div>
-      <CommentForm devtool={devtool} />
+      <CommentForm />
       <CommentList devtool={devtool} />
     </div>
   );

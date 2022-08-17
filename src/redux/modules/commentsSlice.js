@@ -1,5 +1,7 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import axios from 'axios';
+import { BASE_URL } from 'shared/api';
+import { getCookie } from 'shared/cookies';
 
 const initialState = {
   comments: [],
@@ -9,14 +11,19 @@ const initialState = {
 };
 
 export const __postComments = createAsyncThunk(
-  "postComments",
+  'postComments',
   async (payload, thunkAPI) => {
     try {
-      console.log(payload);
-      const response = await axios.post(
-        `http://3.34.185.48:8080/api/articles/${payload.id}/comments`,
-        { comment: payload.comments }
-      );
+      const response = await axios({
+        method: 'post',
+        url: `${BASE_URL}/api/articles/${payload.articlesId}/comments`,
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `${getCookie('mycookie')}`,
+        },
+        data: { comment: payload.comments },
+      });
+
       console.log(response);
       return thunkAPI.fulfillWithValue(response.data);
     } catch (error) {
@@ -25,42 +32,20 @@ export const __postComments = createAsyncThunk(
   }
 );
 
-export const __getComments = createAsyncThunk(
-  "getComments",
-  async (payload, thunkAPI) => {
-    try {
-      const response = await axios.get("");
-      return thunkAPI.fulfillWithValue(response.data);
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error);
-    }
-  }
-);
-
 export const commentsSlice = createSlice({
-  name: "commentsSlice",
+  name: 'commentsSlice',
   initialState,
   reducers: {},
   extraReducers: {
-    [__postComments.pending]: (state, action) => {
+    [__postComments.pending]: (state) => {
       state.isLoading = true;
     },
-    [__postComments.fulfilled]: (state, action) => {
+    [__postComments.fulfilled]: (state, { payload }) => {
       state.isLoading = false;
-      console.log("POST COMMENTS", action.payload);
+      console.log('POST COMMENTS', payload);
+      state.comments = payload;
     },
-    [__postComments.rejected]: (state, action) => {
-      state.isLoading = false;
-      state.error = action.payload;
-    },
-    [__getComments.pending]: (state) => {
-      state.isLoading = true;
-    },
-    [__getComments.fulfilled]: (state, action) => {
-      state.isLoading = false;
-      console.log("GET COMMENTS", action.payload);
-    },
-    [__getComments.rejected]: (state, { payload }) => {
+    [__postComments.rejected]: (state, { payload }) => {
       state.isLoading = false;
       state.error = payload;
     },
