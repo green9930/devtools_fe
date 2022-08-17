@@ -110,7 +110,6 @@ const Form = () => {
         margin="40px auto"
         border={`${colors.gray2} 1px solid`}
         onChangeHandler={onChangeContentHanlder}
-        value={content}
       />
       <StBottomButtonBox>
         <Btn

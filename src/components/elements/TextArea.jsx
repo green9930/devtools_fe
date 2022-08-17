@@ -13,7 +13,6 @@ const TextArea = ({
   onChangeHandler,
   defaultValue,
   maxLength,
-  value,
 }) => {
   return (
     <>
@@ -31,7 +30,6 @@ const TextArea = ({
           onChange={onChangeHandler}
           defaultValue={defaultValue}
           maxLength={maxLength}
-          value={value}
         />
       </StTextArea>
     </>
