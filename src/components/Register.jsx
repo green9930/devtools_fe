@@ -1,13 +1,13 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import Btn from './elements/Btn';
-import Input from './elements/Input';
+import Btn from 'components/elements/Btn';
+import Input from 'components/elements/Input';
 import regExpVali from 'utils/regExpVali';
+import { BASE_URL } from 'shared/api';
 import { colors } from 'styles/theme';
 import axios from 'axios';
 import { BsFillEyeFill, BsFillEyeSlashFill } from 'react-icons/bs';
-import { BASE_URL } from 'shared/api';
 
 const Register = () => {
   const navigate = useNavigate();
@@ -47,13 +47,8 @@ const Register = () => {
   /* REGISTER ----------------------------------------------------------------- */
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('isUsernameAvailable', isUsernameAvailable);
-    console.log('isPasswordAvailable', isPasswordAvailable);
-    console.log('isPasswordConfirmed', isPasswordConfirmed);
     try {
-      console.log('USER', user);
-      const res = await axios.post(`${BASE_URL}/api/register`, user);
-      console.log(res);
+      await axios.post(`${BASE_URL}/api/register`, user);
       navigate('/login');
     } catch (error) {
       setServerAlert(error.response.data.error);
@@ -194,7 +189,7 @@ const Register = () => {
               </StyledMessage>
             </AlertMessageContainer>
           </div>
-          <ConfirmPasswordContainer>
+          <div>
             <Input
               labelText="confirm password"
               id="userConfirmPassword"
@@ -210,7 +205,7 @@ const Register = () => {
                 {confirmPasswordMessage}
               </StyledMessage>
             </AlertMessageContainer>
-          </ConfirmPasswordContainer>
+          </div>
         </InputContainer>
         <ButtonContainer>
           <Btn
@@ -244,8 +239,8 @@ export default Register;
 const InputContainer = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 5px;
   margin-top: 180px;
+  gap: 5px;
 `;
 
 const IdContainer = styled.div`
@@ -287,8 +282,6 @@ const StyledMessage = styled.span`
   color: ${({ isAvailable }) =>
     isAvailable ? `${colors.green1}` : `${colors.yellow}`};
 `;
-
-const ConfirmPasswordContainer = styled.div``;
 
 const ButtonContainer = styled.div`
   display: flex;

@@ -12,6 +12,25 @@ const initialState = {
   error: null,
 };
 
+export const __getDevTools = createAsyncThunk(
+  'getDevTools',
+  async (payload, thunkAPI) => {
+    try {
+      const response = await axios({
+        method: 'get',
+        url: `${BASE_URL}/api/articles`,
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `${getCookie('mycookie')}`,
+        },
+      });
+      return thunkAPI.fulfillWithValue(response.data);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
 export const __postDevTools = createAsyncThunk(
   'postDevTools',
   async (payload, thunkAPI) => {
@@ -25,27 +44,6 @@ export const __postDevTools = createAsyncThunk(
         },
         data: payload,
       });
-      console.log('POST LIST', response);
-      return thunkAPI.fulfillWithValue(response.data);
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error);
-    }
-  }
-);
-
-export const __getDevTools = createAsyncThunk(
-  'getDevTools',
-  async (payload, thunkAPI) => {
-    try {
-      const response = await axios({
-        method: 'get',
-        url: `${BASE_URL}/api/articles`,
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `${getCookie('mycookie')}`,
-        },
-      });
-      console.log('GET LIST', response);
       return thunkAPI.fulfillWithValue(response.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -66,7 +64,6 @@ export const __updateDevTools = createAsyncThunk(
         },
         data: { content: payload.content },
       });
-      console.log('PATCH LIST', response);
       return thunkAPI.fulfillWithValue(response.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -86,7 +83,6 @@ export const __deleteDevTools = createAsyncThunk(
           Authorization: `${getCookie('mycookie')}`,
         },
       });
-      console.log('DELETE LIST', response);
       return thunkAPI.fulfillWithValue(response.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -106,7 +102,6 @@ export const __getDetail = createAsyncThunk(
           Authorization: `${getCookie('mycookie')}`,
         },
       });
-      console.log('GET DETAIL', response);
       return thunkAPI.fulfillWithValue(response.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -141,18 +136,6 @@ export const devToolsSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: {
-    [__postDevTools.pending]: (state, action) => {
-      state.isLoading = true;
-    },
-    [__postDevTools.fulfilled]: (state, action) => {
-      state.isLoading = false;
-      console.log('POST DEVTOOLS', action);
-    },
-    [__postDevTools.rejected]: (state, { payload }) => {
-      state.isLoading = false;
-      console.log('POST DEVTOOL ERROR', payload.response.data.error);
-      state.error = payload.response.data.error;
-    },
     [__getDevTools.pending]: (state) => {
       state.isLoading = true;
     },
@@ -164,51 +147,59 @@ export const devToolsSlice = createSlice({
       state.isLoading = false;
       state.error = payload;
     },
-    [__updateDevTools.pending]: (state, { payload }) => {
+    [__postDevTools.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [__postDevTools.fulfilled]: (state, { payload }) => {
+      state.isLoading = false;
+    },
+    [__postDevTools.rejected]: (state, { payload }) => {
+      state.isLoading = false;
+      state.error = payload.response.data.error;
+    },
+    [__updateDevTools.pending]: (state) => {
       state.isLoading = true;
     },
     [__updateDevTools.fulfilled]: (state, { payload }) => {
       state.isLoading = false;
-      console.log('UPDATE DEVTOOLS', payload);
       state.devtool = payload;
     },
     [__updateDevTools.rejected]: (state, { payload }) => {
       state.isLoading = false;
-      console.log('UPDATE DEVTOOLS ERROR', payload.response.data.error);
       state.error = payload.response.data.error;
     },
-    [__deleteDevTools.pending]: (state, { payload }) => {
+    [__deleteDevTools.pending]: (state) => {
       state.isLoading = true;
     },
     [__deleteDevTools.fulfilled]: (state, { payload }) => {
       state.isLoading = false;
-      console.log('DELETE DEVTOOLS', payload);
-      state.devtools = state.devtools.filter((item) => item.id !== payload);
+      state.devtools = payload;
     },
-    [__deleteDevTools.rejected]: () => {},
+    [__deleteDevTools.rejected]: (state, { payload }) => {
+      state.isLoading = false;
+      state.error = payload.response.data.error;
+    },
     [__getDetail.pending]: (state) => {
       state.isLoading = true;
     },
-    [__getDetail.fulfilled]: (state, action) => {
+    [__getDetail.fulfilled]: (state, { payload }) => {
       state.isLoading = false;
-      console.log('GET DEVTOOL DETAIL', action.payload);
-      state.devtool = action.payload;
+      state.devtool = payload;
     },
     [__getDetail.rejected]: (state, { payload }) => {
       state.isLoading = false;
-      state.error = payload;
+      state.error = payload.response.data.error;
     },
     [__postComments.pending]: (state) => {
       state.isLoading = true;
     },
     [__postComments.fulfilled]: (state, { payload }) => {
       state.isLoading = false;
-      console.log('POST COMMENTS', payload);
       state.devtool.comments.unshift(payload);
     },
     [__postComments.rejected]: (state, { payload }) => {
       state.isLoading = false;
-      state.error = payload;
+      state.error = payload.response.data.error;
     },
   },
 });

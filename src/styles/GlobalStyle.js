@@ -57,8 +57,6 @@ const GlobalStyle = createGlobalStyle`
     :focus {
       outline: none;
     }
-    :hover {
-    }
   }
 `;
 

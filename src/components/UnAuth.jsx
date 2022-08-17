@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { colors } from 'styles/theme';
 import Btn from 'components/elements/Btn';
+import { colors } from 'styles/theme';
 import devtools_title from 'assets/devtools_title.svg';
 
 const UnAuth = () => {

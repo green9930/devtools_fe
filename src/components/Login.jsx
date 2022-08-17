@@ -4,8 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import Input from 'components/elements/Input';
 import Btn from 'components/elements/Btn';
-import { colors } from 'styles/theme';
 import { __postUser } from 'redux/modules/userSlice';
+import { colors } from 'styles/theme';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -21,9 +21,7 @@ const Login = () => {
   /* ALERT MESSAGE ------------------------------------------------------------ */
   const [userAlert, setUserAlert] = useState('');
 
-  const { username, isLogin, isLoading, error } = useSelector(
-    (state) => state.user
-  );
+  const { isLogin, error } = useSelector((state) => state.user);
 
   /* LOGIN -------------------------------------------------------------------- */
   const handleSubmit = async (e) => {
@@ -33,9 +31,7 @@ const Login = () => {
       setUserAlert('로그인 정보를 입력해 주세요.');
     } else {
       setUserAlert('');
-      console.log('USER', user);
       dispatch(__postUser(user));
-      console.log('SUBMIT STATE', username, isLogin, isLoading, error);
       isLogin && navigate('/');
     }
   };

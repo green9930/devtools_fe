@@ -1,33 +1,32 @@
-import { useState } from "react";
-import { useDispatch } from "react-redux";
-import styled from "styled-components";
-import Btn from "components/elements/Btn";
-import TextArea from "components/elements/TextArea";
-import { colors } from "styles/theme";
-import { __updateDevTools } from "redux/modules/devToolsSlice";
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import styled from 'styled-components';
+import Btn from 'components/elements/Btn';
+import TextArea from 'components/elements/TextArea';
+import { __updateDevTools } from 'redux/modules/devToolsSlice';
+import { colors } from 'styles/theme';
 
 const DetailEditor = ({ handleEdit, devtool }) => {
   const dispatch = useDispatch();
   const [text, setText] = useState(devtool.content);
-  const [alertMessage, setAlertMessage] = useState("");
+  const [alertMessage, setAlertMessage] = useState('');
 
   const MAX_LENGTH = 400;
 
   const onChangeContentHandler = (e) => {
     const val = e.target.value.substr(0, 400);
     if (val.length === MAX_LENGTH)
-      setAlertMessage("내용은 400자까지 작성할 수 있습니다.");
-
+      setAlertMessage('내용은 400자까지 작성할 수 있습니다.');
     setText(val);
   };
 
   const onClickEditComplete = () => {
-    if (text.trim() === "") {
-      return setAlertMessage("내용을 입력해 주세요.");
+    if (text.trim() === '') {
+      return setAlertMessage('내용을 입력해 주세요.');
     } else if (text === devtool.content) {
-      return setAlertMessage("내용이 변경되지 않았습니다.");
+      return setAlertMessage('내용이 변경되지 않았습니다.');
     } else {
-      setAlertMessage("");
+      setAlertMessage('');
       dispatch(__updateDevTools({ id: devtool.articleId, content: text }));
       handleEdit();
     }
@@ -109,8 +108,8 @@ const BtnContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
   margin-top: 30px;
+  gap: 20px;
 `;
 
 const MessageContainer = styled.div`

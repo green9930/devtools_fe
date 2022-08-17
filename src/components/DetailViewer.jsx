@@ -1,5 +1,5 @@
-import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import Btn from 'components/elements/Btn';
 import { __deleteDevTools } from 'redux/modules/devToolsSlice';
@@ -9,9 +9,19 @@ const DetailViewer = ({ handleEdit, devtool }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const onClickDeleteHandler = (id) => {
-    dispatch(__deleteDevTools(id));
-    navigate('/');
+  const {
+    articleId,
+    category,
+    title,
+    username,
+    content,
+    createAt,
+    isMyArticles,
+  } = devtool;
+
+  const onClickDeleteHandler = async (articleId) => {
+    dispatch(__deleteDevTools(articleId));
+    await navigate('/');
   };
 
   return (
@@ -19,19 +29,19 @@ const DetailViewer = ({ handleEdit, devtool }) => {
       <DevToolsHeaderContainer>
         <TitleContainer>
           <div>
-            <span>{devtool.category}</span>
+            <span>{category}</span>
           </div>
-          <h2>{devtool.title}</h2>
+          <h2>{title}</h2>
         </TitleContainer>
         <InfoContainer>
           <div>
-            <span> {devtool.username}</span>
+            <span>{username}</span>
           </div>
-          <StCreateAt> {devtool.createAt}</StCreateAt>
+          <StCreateAt>{createAt}</StCreateAt>
         </InfoContainer>
         <ButtonContainer>
-          {devtool.isMyArticles && (
-            <AuthBtn key={devtool.id}>
+          {isMyArticles && (
+            <AuthBtn key={articleId}>
               <Btn
                 size="medium"
                 variant="red_outline"
@@ -42,13 +52,12 @@ const DetailViewer = ({ handleEdit, devtool }) => {
               <Btn
                 size="medium"
                 variant="red_outline"
-                onClickHandler={() => onClickDeleteHandler(devtool.id)}
+                onClickHandler={() => onClickDeleteHandler(articleId)}
               >
                 삭제하기
               </Btn>
             </AuthBtn>
           )}
-
           <Btn
             size="medium"
             variant="blue_outline"
@@ -59,7 +68,7 @@ const DetailViewer = ({ handleEdit, devtool }) => {
         </ButtonContainer>
       </DevToolsHeaderContainer>
       <DevToolsContentContainer>
-        <p>{devtool.content}</p>
+        <p>{content}</p>
       </DevToolsContentContainer>
     </DevToolsContainer>
   );

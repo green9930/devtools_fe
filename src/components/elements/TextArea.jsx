@@ -1,7 +1,7 @@
-import styled from "styled-components";
-import FloatingLabel from "react-bootstrap/FloatingLabel";
-import Form from "react-bootstrap/Form";
-import "bootstrap/dist/css/bootstrap.min.css";
+import styled from 'styled-components';
+import FloatingLabel from 'react-bootstrap/FloatingLabel';
+import Form from 'react-bootstrap/Form';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const TextArea = ({
   width,
@@ -39,8 +39,8 @@ const TextArea = ({
 export default TextArea;
 
 const StTextArea = styled(FloatingLabel)(({ width, margin, height }) => ({
-  width: width || "auto",
-  color: "black",
-  margin: margin || "auto",
+  width: width || 'auto',
+  color: 'black',
+  margin: margin || 'auto',
   height: height,
 }));

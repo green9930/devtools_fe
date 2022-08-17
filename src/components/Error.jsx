@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import Btn from 'components/elements/Btn';
 import { colors } from 'styles/theme';
-import Btn from './elements/Btn';
 
 const Error = () => {
   const navigate = useNavigate();

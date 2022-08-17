@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import { colors } from "styles/theme";
+import styled from 'styled-components';
+import { colors } from 'styles/theme';
 
 const CommentList = ({ devtool }) => {
   return (
@@ -25,8 +25,8 @@ export default CommentList;
 const CommentContainer = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 16px;
   padding-bottom: 80px;
+  gap: 16px;
 `;
 
 const ItemContainer = styled.div`

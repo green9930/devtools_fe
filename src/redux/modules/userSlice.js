@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { getCookie, removeCookie, setCookie } from 'shared/cookies';
 import axios from 'axios';
+import { getCookie, removeCookie, setCookie } from 'shared/cookies';
 import { BASE_URL } from 'shared/api';
 
 const initialState = {
@@ -50,7 +50,6 @@ export const userSlice = createSlice({
     },
     [__postUser.rejected]: (state, { payload }) => {
       state.isLoading = false;
-      console.log('POST USER ERROR', payload.response.data.error);
       state.error = payload.response.data.error;
     },
   },

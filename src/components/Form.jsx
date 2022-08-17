@@ -1,52 +1,52 @@
-import styled from "styled-components";
-import Dropdown from "react-bootstrap/Dropdown";
-import TextArea from "./elements/TextArea";
-import { colors } from "styles/theme";
-import Input from "./elements/Input";
-import { useState } from "react";
-import Btn from "./elements/Btn";
-import { useDispatch } from "react-redux";
-import { __postDevTools } from "redux/modules/devToolsSlice";
-import { useNavigate } from "react-router-dom";
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
+import Dropdown from 'react-bootstrap/Dropdown';
+import Btn from 'components/elements/Btn';
+import Input from 'components/elements/Input';
+import TextArea from 'components/elements/TextArea';
+import { __postDevTools } from 'redux/modules/devToolsSlice';
+import { colors } from 'styles/theme';
 
 const Form = () => {
-  const [option, setOption] = useState("");
-  const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
-  const [optionAlert, setOptionAlert] = useState("");
-  const [titleAlert, setTitleAlert] = useState("");
-  const [contentAlert, setContentAlert] = useState("");
+  const [option, setOption] = useState('');
+  const [title, setTitle] = useState('');
+  const [content, setContent] = useState('');
+  const [optionAlert, setOptionAlert] = useState('');
+  const [titleAlert, setTitleAlert] = useState('');
+  const [contentAlert, setContentAlert] = useState('');
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const alertMessage = {
-    optionAlert: "분류를 선택하세요",
-    titleAlert: "제목을 입력하세요",
-    contentAlert: "내용을 입력하세요",
+    optionAlert: '분류를 선택하세요',
+    titleAlert: '제목을 입력하세요',
+    contentAlert: '내용을 입력하세요',
   };
 
   const onChangeHanlder = (e) => {
-    if (e.target.name === "title") setTitle(e.target.value.slice(0, 30));
-    if (e.target.name === "content") setContent(e.target.value.slice(0, 400));
+    if (e.target.name === 'title') setTitle(e.target.value.slice(0, 30));
+    if (e.target.name === 'content') setContent(e.target.value.slice(0, 400));
   };
 
   const onClickCreateHandler = (e) => {
     e.preventDefault();
-    if (option === "") {
+    if (option === '') {
       return setOptionAlert(alertMessage.optionAlert);
     } else {
-      setOptionAlert("");
+      setOptionAlert('');
     }
-    if (title === "") {
+    if (title === '') {
       return setTitleAlert(alertMessage.titleAlert);
     } else {
-      setTitleAlert("");
+      setTitleAlert('');
     }
-    if (content === "") {
+    if (content === '') {
       return setContentAlert(alertMessage.contentAlert);
     } else {
-      setContentAlert("");
+      setContentAlert('');
     }
 
     dispatch(
@@ -56,20 +56,16 @@ const Form = () => {
         content: content,
       })
     );
-    navigate("/");
+    navigate('/');
   };
 
   return (
     <div>
       <StTopDiv>
         <div>
-          <Dropdown
-            onSelect={(eventKey) => {
-              setOption(eventKey);
-            }}
-          >
+          <Dropdown onSelect={(eventKey) => setOption(eventKey)}>
             <StDropdown variant="success" id="dropdown-basic">
-              {option === "" ? "분류" : option}
+              {option === '' ? '분류' : option}
             </StDropdown>
             <Dropdown.Menu>
               <StDorpdownItem href="#/action-1" eventKey="하드웨어">
@@ -93,7 +89,6 @@ const Form = () => {
           ></Input>
         </div>
       </StTopDiv>
-
       <TextArea
         width="900px"
         height="400px"
@@ -115,15 +110,15 @@ const Form = () => {
           variant="black_outline"
           color={colors.black}
           size="large"
-          onClickHandler={() => navigate("/")}
+          onClickHandler={() => navigate('/')}
         >
           나가기
         </Btn>
       </StBottomButtonBox>
       <StMsgBox>
-        <StMsg>{optionAlert}</StMsg>
-        <StMsg>{titleAlert}</StMsg>
-        <StMsg>{contentAlert}</StMsg>
+        <div>{optionAlert}</div>
+        <div>{titleAlert}</div>
+        <div>{contentAlert}</div>
       </StMsgBox>
     </div>
   );
@@ -136,35 +131,34 @@ const StTopDiv = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  gap: 29px;
   margin-top: 100px;
+  gap: 29px;
 `;
 
 const StDropdown = styled(Dropdown.Toggle)`
-  background-color: ${colors.white};
+  display: flex;
+  width: 190px;
+  height: 36px;
   border: 1px solid ${colors.gray1};
+  border-radius: 4px;
+  padding: 8px, 0px;
+  align-items: center;
+  font-weight: 600px;
+  background-color: ${colors.white};
   color: ${colors.gray1};
 
   &:hover {
     background-color: ${colors.green1};
   }
-
-  width: 190px;
-  height: 48px;
-  border-radius: 4px;
-  padding: 8px, 0px, 8px, 0px;
-  display: flex;
-  align-items: center;
-  font-weight: 600px;
 `;
 
 const StDorpdownItem = styled(Dropdown.Item)`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: 8px 16px;
   width: 190px;
-  height: 32px;
+  height: 28px;
+  padding: 8px 16px;
   font-weight: 600;
   font-size: 14px;
   line-height: 16px;
@@ -172,8 +166,6 @@ const StDorpdownItem = styled(Dropdown.Item)`
 
   &:hover {
     background-color: ${colors.green1};
-    font-family: "Inter";
-    font-style: normal;
     font-weight: 600;
     font-size: 14px;
     line-height: 16px;
@@ -186,9 +178,9 @@ const StBottomButtonBox = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 20px;
   width: 500px;
   margin: 30px auto;
+  gap: 20px;
 `;
 
 const StMsgBox = styled.div`
@@ -200,9 +192,4 @@ const StMsgBox = styled.div`
   height: 42px;
   margin: 20px auto;
   color: ${colors.red};
-`;
-
-const StMsg = styled.div`
-  font-weight: 400px;
-  font-size: 16px;
 `;
