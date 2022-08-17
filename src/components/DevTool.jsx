@@ -25,7 +25,7 @@ const DevTool = (props) => {
         )}
         <CardInfoContainer>
           <CardTop>
-            <Card.Title>
+            <CardTitle>
               <Category>
                 [
                 {props.item.category === "하드웨어" ? "하드웨어" : "소프트웨어"}
@@ -33,11 +33,11 @@ const DevTool = (props) => {
               </Category>
               <Title>
                 {" "}
-                {props.item.title.length < 10
+                {props.item.title.length < 11
                   ? props.item.title
-                  : props.item.title.slice(0, 9) + "..."}
+                  : props.item.title.slice(0, 11) + "..."}
               </Title>
-            </Card.Title>
+            </CardTitle>
 
             <UserName>{props.item.username}</UserName>
           </CardTop>
@@ -51,12 +51,18 @@ const DevTool = (props) => {
 
 export default DevTool;
 
+const CardTitle = styled(Card.Title)`
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+`;
+
 const CardInfoContainer = styled.div`
   cursor: pointer;
 `;
 
 const Category = styled.span`
-  width: 70px;
+  width: 100px;
   height: 24px;
   left: 173px;
   top: 480px;
@@ -69,7 +75,7 @@ const Category = styled.span`
 `;
 
 const Title = styled.span`
-  width: 116px;
+  width: 300px;
   height: 36px;
   left: 663px;
   top: 475px;
@@ -104,9 +110,9 @@ const Date = styled.div`
   font-size: 12px;
   line-height: 15px;
   color: ${colors.blue};
-  margin-top: 72px;
+  margin-top: 55px;
   margin-left: 24px;
-  margin-bottom: 24px;
+  margin-bottom: 20px;
 `;
 
 const CardTop = styled.div`

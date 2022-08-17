@@ -41,6 +41,7 @@ const DetailEditor = ({ handleEdit, devtool }) => {
           height="400px"
           defaultValue={devtool.content}
           onChangeHandler={onChangeContentHandler}
+          // value={text}
         />
       </DevToolsContentContainer>
 

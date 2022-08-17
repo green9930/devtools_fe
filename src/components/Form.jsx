@@ -29,13 +29,14 @@ const Form = () => {
   };
 
   const onChangeTitleHanlder = (e) => {
-    setTitle(e.target.value);
+    setTitle(e.target.value.slice(0, 30));
   };
+  console.log("title.length", title.length);
 
   const onChangeContentHanlder = (e) => {
-    setContent(e.target.value);
+    setContent(e.target.value.slice(0, 400));
   };
-
+  console.log("content.length", content.length);
   // useEffect(() => {}, []);
 
   console.log("option", option);
@@ -71,7 +72,7 @@ const Form = () => {
     );
     navigate("/");
   };
-
+  const inputLengthHandler = () => {};
   return (
     <div>
       <StTopDiv>
@@ -102,7 +103,6 @@ const Form = () => {
             value={title}
             placeHolderText="제목을 입력해주세요"
             onChangeHandler={onChangeTitleHanlder}
-            maxLength="30" // 글자수 제한
             minLength="1"
           ></Input>
         </div>
@@ -114,7 +114,7 @@ const Form = () => {
         margin="40px auto"
         border={`${colors.gray2} 1px solid`}
         onChangeHandler={onChangeContentHanlder}
-        maxLength="400" // 글자수 제한
+        value={content}
       />
       <StBottomButtonBox>
         <Btn
