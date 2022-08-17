@@ -9,7 +9,6 @@ import { css } from 'styled-components';
 // small
 
 /* variant -------------------------------------------------------------------- */
-// disabled
 // black_outline
 // blue_outline
 // blue_filled
