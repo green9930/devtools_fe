@@ -1,7 +1,7 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import axios from 'axios';
-import { BASE_URL } from 'shared/api';
-import { getCookie } from 'shared/cookies';
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import axios from "axios";
+import { BASE_URL } from "shared/api";
+import { getCookie } from "shared/cookies";
 
 const initialState = {
   devtools: [],
@@ -13,19 +13,19 @@ const initialState = {
 };
 
 export const __postDevTools = createAsyncThunk(
-  'postDevTools',
+  "postDevTools",
   async (payload, thunkAPI) => {
     try {
       const response = await axios({
-        method: 'post',
+        method: "post",
         url: `${BASE_URL}/api/articles`,
         headers: {
-          'Content-Type': 'application/json',
-          Authorization: `${getCookie('mycookie')}`,
+          "Content-Type": "application/json",
+          Authorization: `${getCookie("mycookie")}`,
         },
         data: payload,
       });
-      console.log('POST LIST', response);
+      console.log("POST LIST", response);
       return thunkAPI.fulfillWithValue(response.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -34,18 +34,18 @@ export const __postDevTools = createAsyncThunk(
 );
 
 export const __getDevTools = createAsyncThunk(
-  'getDevTools',
+  "getDevTools",
   async (payload, thunkAPI) => {
     try {
       const response = await axios({
-        method: 'get',
+        method: "get",
         url: `${BASE_URL}/api/articles`,
         headers: {
-          'Content-Type': 'application/json',
-          Authorization: `${getCookie('mycookie')}`,
+          "Content-Type": "application/json",
+          Authorization: `${getCookie("mycookie")}`,
         },
       });
-      console.log('GET LIST', response);
+      console.log("GET LIST", response);
       return thunkAPI.fulfillWithValue(response.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -54,19 +54,19 @@ export const __getDevTools = createAsyncThunk(
 );
 
 export const __updateDevTools = createAsyncThunk(
-  'updateDevTools',
+  "updateDevTools",
   async (payload, thunkAPI) => {
     try {
       const response = await axios({
-        method: 'patch',
+        method: "patch",
         url: `${BASE_URL}/api/articles/${payload.id}`,
         headers: {
-          'Content-Type': 'application/json',
-          Authorization: `${getCookie('mycookie')}`,
+          "Content-Type": "application/json",
+          Authorization: `${getCookie("mycookie")}`,
         },
         data: { content: payload.content },
       });
-      console.log('PATCH LIST', response);
+      console.log("PATCH LIST", response);
       return thunkAPI.fulfillWithValue(response.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -75,18 +75,18 @@ export const __updateDevTools = createAsyncThunk(
 );
 
 export const __deleteDevTools = createAsyncThunk(
-  'deleteDevTools',
+  "deleteDevTools",
   async (payload, thunkAPI) => {
     try {
       const response = await axios({
-        method: 'delete',
+        method: "delete",
         url: `${BASE_URL}/api/articles/${payload}`,
         headers: {
-          'Content-Type': 'application/json',
-          Authorization: `${getCookie('mycookie')}`,
+          "Content-Type": "application/json",
+          Authorization: `${getCookie("mycookie")}`,
         },
       });
-      console.log('DELETE LIST', response);
+      console.log("DELETE LIST", response);
       return thunkAPI.fulfillWithValue(response.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -95,18 +95,18 @@ export const __deleteDevTools = createAsyncThunk(
 );
 
 export const __getDetail = createAsyncThunk(
-  'getDetail',
+  "getDetail",
   async (payload, thunkAPI) => {
     try {
       const response = await axios({
-        method: 'get',
+        method: "get",
         url: `${BASE_URL}/api/articles/${payload}`,
         headers: {
-          'Content-Type': 'application/json',
-          Authorization: `${getCookie('mycookie')}`,
+          "Content-Type": "application/json",
+          Authorization: `${getCookie("mycookie")}`,
         },
       });
-      console.log('GET DETAIL', response);
+      console.log("GET DETAIL", response);
       return thunkAPI.fulfillWithValue(response.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -139,7 +139,7 @@ export const __postComments = createAsyncThunk(
 );
 
 export const devToolsSlice = createSlice({
-  name: 'devToolsSlice',
+  name: "devToolsSlice",
   initialState,
   reducers: {},
   extraReducers: {
@@ -148,7 +148,7 @@ export const devToolsSlice = createSlice({
     },
     [__postDevTools.fulfilled]: (state, action) => {
       state.isLoading = false;
-      console.log('POST DEVTOOLS', action);
+      console.log("POST DEVTOOLS", action);
     },
     [__postDevTools.rejected]: (state, action) => {
       state.isLoading = false;
@@ -159,7 +159,7 @@ export const devToolsSlice = createSlice({
     },
     [__getDevTools.fulfilled]: (state, action) => {
       state.isLoading = false;
-      console.log('GET DEVTOOLS', action.payload);
+      console.log("GET DEVTOOLS", action.payload);
       state.devtools = action.payload;
     },
     [__getDevTools.rejected]: (state, { payload }) => {
@@ -171,7 +171,7 @@ export const devToolsSlice = createSlice({
     },
     [__updateDevTools.fulfilled]: (state, { payload }) => {
       state.isLoading = false;
-      console.log('UPDATE DEVTOOLS', payload);
+      console.log("UPDATE DEVTOOLS", payload);
       state.devtool = payload;
     },
     [__updateDevTools.rejected]: (state, { payload }) => {
@@ -183,7 +183,7 @@ export const devToolsSlice = createSlice({
     },
     [__deleteDevTools.fulfilled]: (state, { payload }) => {
       state.isLoading = false;
-      console.log('DELETE DEVTOOLS', payload);
+      console.log("DELETE DEVTOOLS", payload);
       state.devtools = state.devtools.filter((item) => item.id !== payload);
     },
     [__deleteDevTools.rejected]: () => {},
@@ -192,7 +192,7 @@ export const devToolsSlice = createSlice({
     },
     [__getDetail.fulfilled]: (state, action) => {
       state.isLoading = false;
-      console.log('GET DEVTOOL DETAIL', action.payload);
+      console.log("GET DEVTOOL DETAIL", action.payload);
       state.devtool = action.payload;
     },
     [__getDetail.rejected]: (state, { payload }) => {
