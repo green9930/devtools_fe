@@ -11,6 +11,8 @@ const TextArea = ({
   onChangeHandler,
   defaultValue,
   maxLength,
+  value,
+  name,
 }) => {
   return (
     <StTextArea
@@ -28,6 +30,7 @@ const TextArea = ({
         defaultValue={defaultValue}
         maxLength={maxLength}
         value={value}
+        name={name}
       />
     </StTextArea>
   );

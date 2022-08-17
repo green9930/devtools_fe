@@ -1,10 +1,10 @@
-import { useNavigate } from 'react-router-dom';
-import styled from 'styled-components';
-import Card from 'react-bootstrap/Card';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { colors } from 'styles/theme';
-import HW from 'assets/HW.jpg';
-import SW from 'assets/SW.jpg';
+import { useNavigate } from "react-router-dom";
+import styled from "styled-components";
+import Card from "react-bootstrap/Card";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { colors } from "styles/theme";
+import HW from "assets/HW.jpg";
+import SW from "assets/SW.jpg";
 
 const DevTool = ({ item }) => {
   const navigate = useNavigate();
@@ -14,10 +14,10 @@ const DevTool = ({ item }) => {
   return (
     <div>
       <Card
-        style={{ width: '347px', height: '398px', cursor: 'pointer' }}
+        style={{ width: "347px", height: "398px", cursor: "pointer" }}
         onClick={() => navigate(`/detail/${item.articleId}`)}
       >
-        {category === '하드웨어' ? (
+        {category === "하드웨어" ? (
           <Card.Img variant="top" src={HW} />
         ) : (
           <Card.Img variant="top" src={SW} />
@@ -26,10 +26,10 @@ const DevTool = ({ item }) => {
           <CardTop>
             <CardTitle>
               <Category>
-                [{category === '하드웨어' ? '하드웨어' : '소프트웨어'}]
+                [{category === "하드웨어" ? "하드웨어" : "소프트웨어"}]
               </Category>
               <Title>
-                {title.length < 11 ? title : title.slice(0, 11) + '...'}
+                {title.length < 11 ? title : title.slice(0, 11) + "..."}
               </Title>
             </CardTitle>
             <UserName>{username}</UserName>

@@ -3,7 +3,7 @@ import Dropdown from "react-bootstrap/Dropdown";
 import TextArea from "./elements/TextArea";
 import { colors } from "styles/theme";
 import Input from "./elements/Input";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Btn from "./elements/Btn";
 import { useDispatch } from "react-redux";
 import { __postDevTools } from "redux/modules/devToolsSlice";
@@ -26,12 +26,9 @@ const Form = () => {
     contentAlert: "내용을 입력하세요",
   };
 
-  const onChangeTitleHanlder = (e) => {
-    setTitle(e.target.value.slice(0, 30));
-  };
-
-  const onChangeContentHanlder = (e) => {
-    setContent(e.target.value);
+  const onChangeHanlder = (e) => {
+    if (e.target.name === "title") setTitle(e.target.value.slice(0, 30));
+    if (e.target.name === "content") setContent(e.target.value.slice(0, 400));
   };
 
   const onClickCreateHandler = (e) => {
@@ -88,11 +85,11 @@ const Form = () => {
           <Input
             size="large"
             isValid="normal"
-            name="title"
             value={title}
             placeHolderText="제목을 입력해주세요"
-            onChangeHandler={onChangeTitleHanlder}
+            onChangeHandler={onChangeHanlder}
             minLength="1"
+            name="title"
           ></Input>
         </div>
       </StTopDiv>
@@ -102,8 +99,9 @@ const Form = () => {
         height="400px"
         margin="40px auto"
         border={`${colors.gray2} 1px solid`}
-        onChangeHandler={onChangeContentHanlder}
-        defaultValue={content}
+        onChangeHandler={onChangeHanlder}
+        value={content}
+        name="content"
       />
       <StBottomButtonBox>
         <Btn
