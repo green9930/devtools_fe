@@ -129,8 +129,6 @@ export const __postComments = createAsyncThunk(
         },
         data: { comment: payload.comment },
       });
-
-      console.log(response);
       return thunkAPI.fulfillWithValue(response.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -150,17 +148,17 @@ export const devToolsSlice = createSlice({
       state.isLoading = false;
       console.log('POST DEVTOOLS', action);
     },
-    [__postDevTools.rejected]: (state, action) => {
+    [__postDevTools.rejected]: (state, { payload }) => {
       state.isLoading = false;
-      state.error = action.payload;
+      console.log('POST DEVTOOL ERROR', payload.response.data.error);
+      state.error = payload.response.data.error;
     },
     [__getDevTools.pending]: (state) => {
       state.isLoading = true;
     },
-    [__getDevTools.fulfilled]: (state, action) => {
+    [__getDevTools.fulfilled]: (state, { payload }) => {
       state.isLoading = false;
-      console.log('GET DEVTOOLS', action.payload);
-      state.devtools = action.payload;
+      state.devtools = payload;
     },
     [__getDevTools.rejected]: (state, { payload }) => {
       state.isLoading = false;
@@ -176,7 +174,8 @@ export const devToolsSlice = createSlice({
     },
     [__updateDevTools.rejected]: (state, { payload }) => {
       state.isLoading = false;
-      state.error = payload;
+      console.log('UPDATE DEVTOOLS ERROR', payload.response.data.error);
+      state.error = payload.response.data.error;
     },
     [__deleteDevTools.pending]: (state, { payload }) => {
       state.isLoading = true;
