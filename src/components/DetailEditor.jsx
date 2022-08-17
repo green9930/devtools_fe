@@ -1,32 +1,37 @@
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import Btn from 'components/elements/Btn';
-import { colors } from 'styles/theme';
 import TextArea from 'components/elements/TextArea';
-import { useDispatch, useSelector } from 'react-redux';
-import { useParams, useNavigate, Navigate } from 'react-router-dom';
-import { useState, useEffect } from 'react';
-import { __getDetail, __updateDevTools } from 'redux/modules/devToolsSlice';
+import { colors } from 'styles/theme';
+import { __updateDevTools } from 'redux/modules/devToolsSlice';
 
 const DetailEditor = ({ handleEdit, devtool }) => {
-  const [edit, setEdit] = useState({ ...devtool });
-  let { id } = useParams();
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+  const [text, setText] = useState(devtool.content);
+  const [alertMessage, setAlertMessage] = useState('');
+
+  const MAX_LENGTH = 400;
 
   const onChangeContentHandler = (e) => {
-    const { value } = e.target;
-    setEdit({ id: +id, content: value });
-  };
+    const val = e.target.value.substr(0, 400);
+    if (val.length === MAX_LENGTH)
+      setAlertMessage('내용은 400자까지 작성할 수 있습니다.');
 
-  console.log('edit', edit);
+    setText(val);
+  };
 
   const onClickEditComplete = () => {
-    dispatch(__updateDevTools(edit));
-    dispatch(__getDetail(id));
-    handleEdit();
+    if (text.trim() === '') {
+      return setAlertMessage('내용을 입력해 주세요.');
+    } else if (text === devtool.content) {
+      return setAlertMessage('내용이 변경되지 않았습니다.');
+    } else {
+      setAlertMessage('');
+      dispatch(__updateDevTools({ id: devtool.articleId, content: text }));
+      handleEdit();
+    }
   };
-
-  console.log(devtool);
 
   return (
     <DevToolsContainer>
@@ -38,17 +43,14 @@ const DetailEditor = ({ handleEdit, devtool }) => {
           <h2>{devtool.title}</h2>
         </TitleContainer>
       </DevToolsHeaderContainer>
-
       <DevToolsContentContainer>
         <TextArea
           key={devtool.id}
           height="400px"
-          defaultValue={devtool.content}
+          value={text}
           onChangeHandler={onChangeContentHandler}
-          // value={text}
         />
       </DevToolsContentContainer>
-
       <BtnContainer>
         <Btn
           size="large"
@@ -61,6 +63,9 @@ const DetailEditor = ({ handleEdit, devtool }) => {
           나가기
         </Btn>
       </BtnContainer>
+      <MessageContainer>
+        <span>{alertMessage}</span>
+      </MessageContainer>
     </DevToolsContainer>
   );
 };
@@ -106,4 +111,10 @@ const BtnContainer = styled.div`
   align-items: center;
   gap: 20px;
   margin-top: 30px;
+`;
+
+const MessageContainer = styled.div`
+  margin-top: 20px;
+  text-align: center;
+  color: ${colors.red};
 `;
