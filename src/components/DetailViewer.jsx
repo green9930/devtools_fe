@@ -1,10 +1,9 @@
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import Btn from 'components/elements/Btn';
+import { __deleteDevTools } from 'redux/modules/devToolsSlice';
 import { colors } from 'styles/theme';
-import { useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
-import { __deleteDevTools, __getDevTools } from 'redux/modules/devToolsSlice';
 
 const DetailViewer = ({ handleEdit, devtool }) => {
   const navigate = useNavigate();
@@ -78,8 +77,8 @@ const DevToolsContainer = styled.div`
 `;
 
 const DevToolsHeaderContainer = styled.div`
-  padding-bottom: 20px;
   margin-bottom: 20px;
+  padding-bottom: 20px;
   border-bottom: 1px solid ${colors.gray2};
 `;
 
@@ -88,6 +87,7 @@ const TitleContainer = styled.div`
   align-items: center;
   justify-content: start;
   margin-bottom: 10px;
+  gap: 15px;
 
   div {
     width: 120px;
@@ -105,6 +105,7 @@ const InfoContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: start;
+  gap: 15px;
 
   div {
     width: 120px;

@@ -9,7 +9,6 @@ import { userActions } from 'redux/modules/userSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import ErrorPage from 'pages/ErrorPage';
 import UnAuthPage from 'pages/UnAuthPage';
-import Loading from 'components/Loading';
 
 const Router = () => {
   const dispatch = useDispatch();

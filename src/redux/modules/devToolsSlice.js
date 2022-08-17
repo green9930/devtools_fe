@@ -5,7 +5,9 @@ import { getCookie } from 'shared/cookies';
 
 const initialState = {
   devtools: [],
-  devtool: {},
+  devtool: {
+    comments: [],
+  },
   isLoading: false,
   error: null,
 };
@@ -112,6 +114,28 @@ export const __getDetail = createAsyncThunk(
   }
 );
 
+export const __postComments = createAsyncThunk(
+  'postComments',
+  async (payload, thunkAPI) => {
+    try {
+      const response = await axios({
+        method: 'post',
+        url: `${BASE_URL}/api/articles/${payload.articleId}/comments`,
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `${getCookie('mycookie')}`,
+        },
+        data: { comment: payload.comments },
+      });
+
+      console.log(response);
+      return thunkAPI.fulfillWithValue(response.data);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
 export const devToolsSlice = createSlice({
   name: 'devToolsSlice',
   initialState,
@@ -170,6 +194,18 @@ export const devToolsSlice = createSlice({
       state.devtool = action.payload;
     },
     [__getDetail.rejected]: (state, { payload }) => {
+      state.isLoading = false;
+      state.error = payload;
+    },
+    [__postComments.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [__postComments.fulfilled]: (state, { payload }) => {
+      state.isLoading = false;
+      console.log('POST COMMENTS', payload);
+      state.devtool.comments.unshift(payload);
+    },
+    [__postComments.rejected]: (state, { payload }) => {
       state.isLoading = false;
       state.error = payload;
     },
