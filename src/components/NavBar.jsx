@@ -15,14 +15,14 @@ const NavBar = () => {
     (state) => state.user
   );
 
-  console.log('USER', username, 'ISLOGIN', isLogin);
-
   useEffect(() => {
     dispatch(userActions.getUser());
   }, [dispatch]);
 
-  const handleLogout = () =>
-    dispatch(userActions.deleteUser()).then(() => navigate('/'));
+  const handleLogout = async () => {
+    dispatch(userActions.deleteUser());
+    await navigate('/');
+  };
 
   if (isLoading)
     return (
