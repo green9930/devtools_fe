@@ -32,7 +32,6 @@ const Input = ({
         onChange={onChangeHandler}
         maxLength={maxLength}
         minLength={minLength}
-        onInput={oninput} //추가
       />
     </InputContainer>
   );
