@@ -5,14 +5,12 @@ import { useState } from 'react';
 import { colors } from 'styles/theme';
 import lengthVali from 'utils/lengthVali';
 import { useDispatch, useSelector } from 'react-redux';
-import { __postComments } from 'redux/modules/commentsSlice';
 import { useParams } from 'react-router-dom';
-import { __getDetail } from 'redux/modules/devToolsSlice';
+import { __postComments } from 'redux/modules/devToolsSlice';
 
 const CommentForm = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
-  console.log(id);
 
   const [alertMessage, setAlertMessage] = useState('');
   const [text, setText] = useState('');
@@ -26,12 +24,10 @@ const CommentForm = () => {
 
     dispatch(
       __postComments({
-        articlesId: id,
+        articleId: id,
         comments: text,
       })
     );
-
-    dispatch(__getDetail());
   };
 
   const handleChange = (e) => {
@@ -41,11 +37,13 @@ const CommentForm = () => {
       : setAlertMessage('');
     setText(val);
   };
-  // console.log(devtool);
+
   return (
     <>
       <CommentFormContainer>
-        <NameContainer>{/* <span>{loginuser}</span> */}</NameContainer>
+        <NameContainer>
+          <span>{username}</span>
+        </NameContainer>
         <form onSubmit={handleSubmit}>
           <Input
             labelText="댓글"
