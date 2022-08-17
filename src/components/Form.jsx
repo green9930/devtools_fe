@@ -1,29 +1,29 @@
-import styled from 'styled-components';
-import Dropdown from 'react-bootstrap/Dropdown';
-import TextArea from './elements/TextArea';
-import { colors } from 'styles/theme';
-import Input from './elements/Input';
-import { useState, useEffect } from 'react';
-import Btn from './elements/Btn';
-import { useDispatch } from 'react-redux';
-import { __postDevTools } from 'redux/modules/devToolsSlice';
-import { useNavigate } from 'react-router-dom';
+import styled from "styled-components";
+import Dropdown from "react-bootstrap/Dropdown";
+import TextArea from "./elements/TextArea";
+import { colors } from "styles/theme";
+import Input from "./elements/Input";
+import { useState, useEffect } from "react";
+import Btn from "./elements/Btn";
+import { useDispatch } from "react-redux";
+import { __postDevTools } from "redux/modules/devToolsSlice";
+import { useNavigate } from "react-router-dom";
 
 const Form = () => {
-  const [option, setOption] = useState('');
-  const [title, setTitle] = useState('');
-  const [content, setContent] = useState('');
-  const [optionAlert, setOptionAlert] = useState('');
-  const [titleAlert, setTitleAlert] = useState('');
-  const [contentAlert, setContentAlert] = useState('');
+  const [option, setOption] = useState("");
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
+  const [optionAlert, setOptionAlert] = useState("");
+  const [titleAlert, setTitleAlert] = useState("");
+  const [contentAlert, setContentAlert] = useState("");
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const alertMessage = {
-    optionAlert: '분류를 선택하세요',
-    titleAlert: '제목을 입력하세요',
-    contentAlert: '내용을 입력하세요',
+    optionAlert: "분류를 선택하세요",
+    titleAlert: "제목을 입력하세요",
+    contentAlert: "내용을 입력하세요",
   };
 
   const onChangeTitleHanlder = (e) => {
@@ -31,25 +31,25 @@ const Form = () => {
   };
 
   const onChangeContentHanlder = (e) => {
-    setContent(e.target.value.slice(0, 400));
+    setContent(e.target.value);
   };
 
   const onClickCreateHandler = (e) => {
     e.preventDefault();
-    if (option === '') {
+    if (option === "") {
       return setOptionAlert(alertMessage.optionAlert);
     } else {
-      setOptionAlert('');
+      setOptionAlert("");
     }
-    if (title === '') {
+    if (title === "") {
       return setTitleAlert(alertMessage.titleAlert);
     } else {
-      setTitleAlert('');
+      setTitleAlert("");
     }
-    if (content === '') {
+    if (content === "") {
       return setContentAlert(alertMessage.contentAlert);
     } else {
-      setContentAlert('');
+      setContentAlert("");
     }
 
     dispatch(
@@ -59,7 +59,7 @@ const Form = () => {
         content: content,
       })
     );
-    navigate('/');
+    navigate("/");
   };
 
   return (
@@ -72,7 +72,7 @@ const Form = () => {
             }}
           >
             <StDropdown variant="success" id="dropdown-basic">
-              {option === '' ? '분류' : option}
+              {option === "" ? "분류" : option}
             </StDropdown>
             <Dropdown.Menu>
               <StDorpdownItem href="#/action-1" eventKey="하드웨어">
@@ -103,6 +103,7 @@ const Form = () => {
         margin="40px auto"
         border={`${colors.gray2} 1px solid`}
         onChangeHandler={onChangeContentHanlder}
+        defaultValue={content}
       />
       <StBottomButtonBox>
         <Btn
@@ -116,7 +117,7 @@ const Form = () => {
           variant="black_outline"
           color={colors.black}
           size="large"
-          onClickHandler={() => navigate('/')}
+          onClickHandler={() => navigate("/")}
         >
           나가기
         </Btn>
@@ -173,7 +174,7 @@ const StDorpdownItem = styled(Dropdown.Item)`
 
   &:hover {
     background-color: ${colors.green1};
-    font-family: 'Inter';
+    font-family: "Inter";
     font-style: normal;
     font-weight: 600;
     font-size: 14px;
