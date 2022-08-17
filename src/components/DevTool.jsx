@@ -31,8 +31,14 @@ const DevTool = (props) => {
                 {props.item.category === "하드웨어" ? "하드웨어" : "소프트웨어"}
                 ]
               </Category>
-              <Title> {props.item.title}</Title>
+              <Title>
+                {" "}
+                {props.item.title.length < 10
+                  ? props.item.title
+                  : props.item.title.slice(0, 9) + "..."}
+              </Title>
             </Card.Title>
+
             <UserName>{props.item.username}</UserName>
           </CardTop>
 
@@ -88,7 +94,7 @@ const UserName = styled.span`
 `;
 
 const Date = styled.div`
-  width: 154px;
+  width: 180px;
   height: 15px;
   left: 967px;
   top: 622px;
