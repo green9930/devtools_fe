@@ -1,11 +1,7 @@
 import styled from 'styled-components';
 import { colors } from 'styles/theme';
-import { useParams } from 'react-router-dom';
 
 const CommentList = ({ devtool }) => {
-  const { id } = useParams();
-
-  /* -------------------------------------------------------------------------- */
   // {
   //   category: "소프트웨어",
   //   comments: [
@@ -26,8 +22,6 @@ const CommentList = ({ devtool }) => {
   //   username: "test2"
   // }
 
-  // userName 서버 수정 이후 username으로 변경해야 함
-  console.log('DEVTOOL', devtool);
   return (
     <CommentContainer>
       {devtool?.comments?.map((val) => {
