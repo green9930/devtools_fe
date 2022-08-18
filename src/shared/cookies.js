@@ -8,4 +8,6 @@ export const setCookie = (name, value) =>
     path: '/',
     expires: new Date(Date.now() + 24 * 60 * 60 * 1000),
   });
-export const removeCookie = (name) => cookies.remove(name);
+
+export const removeCookie = (name) =>
+  cookies.remove(name, { expires: new Date(Date.now()) });
