@@ -13,7 +13,7 @@ import { userActions } from 'redux/modules/userSlice';
 const Router = () => {
   const dispatch = useDispatch();
 
-  const { isLoading, username, isLogin } = useSelector((state) => state.user);
+  const { isLogin } = useSelector((state) => state.user);
 
   useEffect(() => {
     dispatch(userActions.getUser());

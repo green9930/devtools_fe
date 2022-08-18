@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import Btn from './elements/Btn';
-import Input from './elements/Input';
+import Btn from 'components/elements/Btn';
+import Input from 'components/elements/Input';
 import regExpVali from 'utils/regExpVali';
+import { BASE_URL } from 'shared/api';
 import { colors } from 'styles/theme';
 import axios from 'axios';
 import { BsFillEyeFill, BsFillEyeSlashFill } from 'react-icons/bs';
@@ -31,6 +32,7 @@ const Register = () => {
     passed: '사용 가능한 아이디입니다.',
     notPassed: '이미 사용 중인 아이디입니다.',
   };
+  const [serverAlert, setServerAlert] = useState('');
   /* REGISTER FORM 통과 확인 ------------------------------------------------------ */
   const [isUsernameAvailable, setIsUsernameAvailable] = useState(false);
   const [isPasswordAvailable, setIsPasswordAvailable] = useState(false);
@@ -45,16 +47,11 @@ const Register = () => {
   /* REGISTER ----------------------------------------------------------------- */
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('isUsernameAvailable', isUsernameAvailable);
-    console.log('isPasswordAvailable', isPasswordAvailable);
-    console.log('isPasswordConfirmed', isPasswordConfirmed);
     try {
-      console.log('USER', user);
-      const res = await axios.post(`http://3.34.185.48/api/register`, user);
-      console.log(res);
+      await axios.post(`${BASE_URL}/api/register`, user);
       navigate('/login');
     } catch (error) {
-      console.error(error);
+      setServerAlert(error.response.data.error);
     }
   };
 
@@ -78,7 +75,7 @@ const Register = () => {
 
   /* 아이디 중복 검사 ---------------------------------------------------------------- */
   const handleCheckDuplicate = async () => {
-    const res = await axios.post(`http://3.34.185.48/api/register/username`, {
+    const res = await axios.post(`${BASE_URL}/api/register/username`, {
       username: user.username,
     });
 
@@ -104,6 +101,8 @@ const Register = () => {
     setIsPasswordConfirmed(false);
 
     setUser({ ...user, password: password });
+
+    setIsPasswordAvailable(true);
 
     if (regExpVali(password, name)) {
       setPasswordMessage('올바른 비밀번호 형식입니다.');
@@ -190,7 +189,7 @@ const Register = () => {
               </StyledMessage>
             </AlertMessageContainer>
           </div>
-          <ConfirmPasswordContainer>
+          <div>
             <Input
               labelText="confirm password"
               id="userConfirmPassword"
@@ -206,7 +205,7 @@ const Register = () => {
                 {confirmPasswordMessage}
               </StyledMessage>
             </AlertMessageContainer>
-          </ConfirmPasswordContainer>
+          </div>
         </InputContainer>
         <ButtonContainer>
           <Btn
@@ -228,6 +227,9 @@ const Register = () => {
           </Btn>
         </ButtonContainer>
       </form>
+      <ServerMessageContainer>
+        <StyledMessage isAvailable={false}>{serverAlert}</StyledMessage>
+      </ServerMessageContainer>
     </div>
   );
 };
@@ -237,8 +239,8 @@ export default Register;
 const InputContainer = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 5px;
   margin-top: 180px;
+  gap: 5px;
 `;
 
 const IdContainer = styled.div`
@@ -281,10 +283,13 @@ const StyledMessage = styled.span`
     isAvailable ? `${colors.green1}` : `${colors.yellow}`};
 `;
 
-const ConfirmPasswordContainer = styled.div``;
-
 const ButtonContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 20px;
+`;
+
+const ServerMessageContainer = styled.div`
+  margin-top: 10px;
+  text-align: center;
 `;

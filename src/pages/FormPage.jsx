@@ -1,5 +1,5 @@
-import Form from 'components/Form';
 import Layout from 'components/layout/Layout';
+import Form from 'components/Form';
 
 const FormPage = () => {
   return (

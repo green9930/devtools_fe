@@ -1,19 +1,17 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import Btn from 'components/elements/Btn';
-import devtools_title from 'assets/devtools_title.svg';
-import { colors } from 'styles/theme';
-import { useDispatch, useSelector } from 'react-redux';
 import { userActions } from 'redux/modules/userSlice';
+import { colors } from 'styles/theme';
+import devtools_title from 'assets/devtools_title.svg';
 
 const NavBar = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const { username, isLogin, isLoading, error } = useSelector(
-    (state) => state.user
-  );
+  const { username, isLoading } = useSelector((state) => state.user);
 
   useEffect(() => {
     dispatch(userActions.getUser());
@@ -62,12 +60,12 @@ const NavBar = () => {
 export default NavBar;
 
 const NavBarContainer = styled.div`
-  background-color: ${colors.yellow};
-  width: 100%;
-  height: 80px;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  background-color: ${colors.yellow};
+  width: 100%;
+  height: 80px;
   padding: 0 40px;
   position: relative;
 

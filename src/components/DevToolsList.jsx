@@ -1,12 +1,12 @@
-import styled from 'styled-components';
-import DevTool from './DevTool';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import styled from 'styled-components';
+import DevTool from 'components/DevTool';
 import { __getDevTools } from 'redux/modules/devToolsSlice';
 
 const DevToolsList = () => {
   const dispatch = useDispatch();
-  const { devtools, isLoading, error } = useSelector((state) => state.devTools);
+  const { devtools } = useSelector((state) => state.devTools);
 
   useEffect(() => {
     dispatch(__getDevTools());
@@ -27,7 +27,7 @@ const StDevToolsList = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: center;
-  gap: 50px;
-  margin: 100px auto;
   flex-wrap: wrap;
+  margin: 100px auto;
+  gap: 50px;
 `;

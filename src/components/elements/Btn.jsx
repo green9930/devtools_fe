@@ -1,7 +1,5 @@
-import styled from 'styled-components';
-// import Button from "react-bootstrap/Button";
+import styled, { css } from 'styled-components';
 import { colors } from 'styles/theme';
-import { css } from 'styled-components';
 
 /* size --------------------------------------------------------------------- */
 // large

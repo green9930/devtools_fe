@@ -1,5 +1,3 @@
-import styled from 'styled-components';
-
 const ErrorAlert = () => {
   return (
     <div>

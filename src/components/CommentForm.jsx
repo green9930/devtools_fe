@@ -1,11 +1,11 @@
+import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import Input from 'components/elements/Input';
 import Btn from 'components/elements/Btn';
-import { useState } from 'react';
 import { colors } from 'styles/theme';
 import lengthVali from 'utils/lengthVali';
-import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
 import { __postComments } from 'redux/modules/devToolsSlice';
 
 const CommentForm = () => {
@@ -14,6 +14,7 @@ const CommentForm = () => {
 
   const [alertMessage, setAlertMessage] = useState('');
   const [text, setText] = useState('');
+
   const { username } = useSelector((state) => state.user);
 
   const handleSubmit = (e) => {
@@ -21,7 +22,6 @@ const CommentForm = () => {
     text.trim() === ''
       ? setAlertMessage('댓글을 입력해 주세요.(최대 40자)')
       : setAlertMessage('');
-
     dispatch(
       __postComments({
         articleId: id,
