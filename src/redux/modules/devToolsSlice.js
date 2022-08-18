@@ -162,7 +162,7 @@ export const devToolsSlice = createSlice({
     },
     [__updateDevTools.fulfilled]: (state, { payload }) => {
       state.isLoading = false;
-      state.devtool = payload;
+      state.devtool.content = payload.content;
     },
     [__updateDevTools.rejected]: (state, { payload }) => {
       state.isLoading = false;
@@ -173,7 +173,9 @@ export const devToolsSlice = createSlice({
     },
     [__deleteDevTools.fulfilled]: (state, { payload }) => {
       state.isLoading = false;
-      state.devtools = payload;
+      state.devtools = state.devtools.filter(
+        (val) => val.articleId !== payload
+      );
     },
     [__deleteDevTools.rejected]: (state, { payload }) => {
       state.isLoading = false;
